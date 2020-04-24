@@ -1,9 +1,3 @@
----
-title: dynamic-wallpaper
-created: '2020-04-24T12:19:48.306Z'
-modified: '2020-04-24T12:36:29.142Z'
----
-
 # dynamic-wallpaper
 
 <p align="left">
