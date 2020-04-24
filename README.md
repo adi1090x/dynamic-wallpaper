@@ -53,7 +53,7 @@ Available options:
 
 ### Features
 
-+ (Currently) 2 different types of wallpaper set.
++ (Currently) 2 different types of wallpaper set (2560x1440px).
 + (Currently) Change according to time, throughout the day.
 + Tested on - **WM:** *Openbox*, *i3wm*, *Fluxbox*, *Fvwm*, *Swaywm* & **DE:** *Pantheon*, *Gnome(ubuntu)*, *Deepin*, *Cinnamon*, *XFCE*, *LXDE*, *MATE*.
 
