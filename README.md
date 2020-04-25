@@ -46,10 +46,15 @@ $ dwall
 
 Dynamic Wallpaper V1.0
 Developed By - Aditya Shakya (@adi1090x)
+-s, --style	=	style name
+-n, --number	=	number of images in theme
+-h, --help	=	show usage
 
 Styles Dir: /usr/share/dynamic-wallpaper/images
 
-Available options:  -animecity  -bitday  -exodus  -firewatch  -firewatch2  -forest  -maldives  -mojave  -moon  -seoul  
+Example: dwall -s=firewatch -n=24
+Styles folder: /usr/share/dynamic-wallpaper/images/
+Available styles:  -animecity  -bitday  -exodus  -firewatch  -firewatch2  -forest  -maldives  -mojave  -moon  -seoul  
 ```
 
 ### Features
@@ -64,7 +69,7 @@ Available options:  -animecity  -bitday  -exodus  -firewatch  -firewatch2  -fore
 
 + Download a wallpaper set you like.
 + Make a dir in `/usr/share/dynamic-wallpaper/images`
-+ Rename your images(must be **jpg**) to `0-24`, if you don't have enough, symlink them.
++ Rename your images(must be **jpg**) to `0-24`. If you have a different count of images, use -n option.
 + Run the program and apply it.
 
 ### Previews
