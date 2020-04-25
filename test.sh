@@ -1,5 +1,6 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
+## Contributors : @sdushantha, @megasyl
 ## Author : Aditya Shakya (adi1090x)
 ## Mail : adi1090x@gmail.com
 ## Github : @adi1090x
@@ -16,7 +17,7 @@ case "$OSTYPE" in
 esac
 
 ## For XFCE
-if [[ "$OSTYPE" == "linux"* ]]; then
+if [ "$OSTYPE" == "linux"* ]; then
     SCREEN="$(xrandr --listactivemonitors | awk -F ' ' 'END {print $1}' | tr -d \:)"
     MONITOR="$(xrandr --listactivemonitors | awk -F ' ' 'END {print $2}' | tr -d \*+)"
 fi
@@ -36,50 +37,48 @@ case "$OSTYPE" in
 	else SETTER="hsetroot -fill"; fi ;;
 esac
 
-## Available styles
-##
-## bitday, firewatch
 STYLE=
 
-function set_wallpaper {
-    $SETTER $DIR/images/$STYLE/$1.png
+set_wallpaper() {
+    $SETTER "$DIR/images/$STYLE/$1.jpg"
 }
 
-function main {
+main() {
     num=$(($TIME/1))
-    set_wallpaper $num; sleep 10
+    set_wallpaper "$num"; sleep 60
 }
 
-function usage {
+usage() {
+available_styles=($(ls $DIR/images | sed 's/^/-/'))
 echo -n "
 Dynamic Wallpaper V1.0
 Developed By - Aditya Shakya (@adi1090x)
 
-Available options:
--bitday		-firewatch
+Styles Dir: $DIR/images
 
 "
+printf "Available options:  "
+printf -- '%s  ' "${available_styles[@]}"
+printf -- '\n\n'
 }
 
-function init {
+init() {
     while true; do
         main && exec $DIR/test.sh -$STYLE
     done
 }
 
-function is_valid_style {
-    available_styles=(-bitday -firewatch)
+is_valid_style() {
+    available_styles=($(ls $DIR/images | sed 's/^/-/'))
     for i in "${available_styles[@]}"
     do
-        if [ "$i" == "$1" ] ; then
-            STYLE=$(echo $1 | cut -d- -f 2-)
-        fi
+        [ "$i" == "$1" ] && STYLE=$(echo "$1" | cut -d- -f 2-)
     done
 }
 
-is_valid_style $1
+is_valid_style "$1"
 
-if [[ $STYLE ]]; then
+if [ "$STYLE" ]; then
     init
 else
     usage
