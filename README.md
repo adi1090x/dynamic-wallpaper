@@ -47,8 +47,9 @@ $ dwall
 Dynamic Wallpaper V1.0
 Developed By - Aditya Shakya (@adi1090x)
 
-Available options:
--bitday		-firewatch
+Themes Dir: /usr/share/dynamic-wallpaper/images
+
+Available options:  -animecity  -bitday  -exodus  -firewatch  -firewatch2  -forest  -maldives  -mojave  -moon  -seoul  
 ```
 
 ### Features
@@ -88,5 +89,5 @@ Available options:
 
 ### Contributors
 
-+ @megasyl
-+ @sdushantha 
++ @megasyl(https://github.com/megasyl)
++ @sdushantha(https://github.com/sdushantha) 
