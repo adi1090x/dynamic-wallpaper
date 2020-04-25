@@ -73,6 +73,19 @@ Available options:  -animecity  -bitday  -exodus  -firewatch  -firewatch2  -fore
 |--|--|
 |![img](https://raw.githubusercontent.com/adi1090x/files/master/dynamic-wallpaper/bitday.gif)|![img](https://raw.githubusercontent.com/adi1090x/files/master/dynamic-wallpaper/firewatch.gif)|
 
+|Anime City|Exodus|
+|--|--|
+|![img](https://raw.githubusercontent.com/adi1090x/files/master/dynamic-wallpaper/animecity.gif)|![img](https://raw.githubusercontent.com/adi1090x/files/master/dynamic-wallpaper/exodus.gif)|
+
+|Forest|Mojave|
+|--|--|
+|![img](https://raw.githubusercontent.com/adi1090x/files/master/dynamic-wallpaper/forest.gif)|![img](https://raw.githubusercontent.com/adi1090x/files/master/dynamic-wallpaper/mojave.gif)|
+
+|Maldives|Seoul|
+|--|--|
+|![img](https://raw.githubusercontent.com/adi1090x/files/master/dynamic-wallpaper/maldives.gif)|![img](https://raw.githubusercontent.com/adi1090x/files/master/dynamic-wallpaper/seoul.gif)|
+
+
 ### Support This Project
 <p align="left">
 <a href="https://www.paypal.me/adi1090x" target="_blank"><img alt="undefined" src="https://img.shields.io/badge/paypal-adi1090x-blue?style=for-the-badge&logo=paypal"></a>
