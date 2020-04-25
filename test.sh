@@ -45,7 +45,7 @@ set_wallpaper() {
 
 main() {
     num=$(($TIME/1))
-    set_wallpaper "$num"; sleep 60
+    set_wallpaper "$num" && sleep 60
 }
 
 usage() {
