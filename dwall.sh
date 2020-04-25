@@ -54,7 +54,7 @@ echo -n "
 Dynamic Wallpaper V1.0
 Developed By - Aditya Shakya (@adi1090x)
 
-Themes Dir: $DIR/images
+Styles Dir: $DIR/images
 
 "
 printf "Available options:  "
