@@ -53,9 +53,18 @@ Available options:
 
 ### Features
 
-+ (Currently) 2 different types of wallpaper set (2560x1440px).
++ Dynamic style selection.
++ User can add their own wallpapers.
++ 10 different types of wallpaper set (HD, UHD).
 + (Currently) Change according to time, throughout the day.
 + Tested on - **WM:** *Openbox*, *i3wm*, *Fluxbox*, *Fvwm*, *Swaywm* & **DE:** *Pantheon*, *Gnome(ubuntu)*, *Deepin*, *Cinnamon*, *XFCE*, *LXDE*, *MATE*.
+
+### How to add own wallpapers
+
++ Download a wallpaper set you like.
++ Make a dir in `/usr/share/dynamic-wallpaper/images`
++ Rename your images(must be **jpg**) to `0-24`, if you don't have enough, symlink them.
++ Run the program and apply it.
 
 ### Previews
 
@@ -71,7 +80,13 @@ Available options:
 </p>
 
 ### FYI
+
 + Currently, KDE is not supported.
 + If you can improve it, you're welcome.
 + You can add ***dwall -option &*** to your wm autostart file to set it as wallpaper after login.
 + Have Fun!
+
+### Contributors
+
++ @megasyl
++ @sdushantha 
