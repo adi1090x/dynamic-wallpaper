@@ -69,7 +69,7 @@ Available styles:  -animecity  -bitday  -exodus  -firewatch  -firewatch2  -fores
 
 + Download a wallpaper set you like.
 + Make a dir in `/usr/share/dynamic-wallpaper/images`
-+ Rename your images(must be **jpg**) to `0-24`. If you have a different count of images, use -n option.
++ Rename your images(must be **jpg/png**) to `0-24`. If you have a different count of images, use -n option.
 + Run the program and apply it.
 
 ### Previews

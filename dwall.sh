@@ -40,12 +40,14 @@ STYLE=
 NUMBER=24
 
 set_wallpaper() {
-    $SETTER "$DIR/images/$STYLE/$1.jpg"
+  image="$DIR/images/$STYLE/$1"
+  [[ $(test -f "$image.jpg") ]] && path="$image.jpg" || path="$image.png"
+  $SETTER "$path"
 }
 
 main() {
   num=$(echo "scale=1; $TIME/24*$NUMBER" | bc | awk '{print int($1+0.5)}')
-    set_wallpaper $num; sleep 10
+    set_wallpaper $num && sleep 10
 }
 
 usage() {
@@ -61,7 +63,8 @@ Example: dwall -s=firewatch -n=24
 Styles folder: $DIR/images/
 Available styles:
 "
-printf -- '-%s\n' "${available_styles[@]}"
+printf -- '%s\n' "${available_styles[@]}"
+exit 0
 }
 
 init() {
