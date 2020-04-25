@@ -1,6 +1,5 @@
-#!/usr/bin/env bash
+#!/bin/bash
 
-## Contributors : @sdushantha, @megasyl
 ## Author : Aditya Shakya (adi1090x)
 ## Mail : adi1090x@gmail.com
 ## Github : @adi1090x
@@ -38,14 +37,15 @@ case "$OSTYPE" in
 esac
 
 STYLE=
+NUMBER=24
 
 set_wallpaper() {
     $SETTER "$DIR/images/$STYLE/$1.jpg"
 }
 
 main() {
-    num=$(($TIME/1))
-    set_wallpaper "$num" && sleep 60
+  num=$(echo "scale=1; $TIME/24*$NUMBER" | bc | awk '{print int($1+0.5)}')
+    set_wallpaper $num; sleep 10
 }
 
 usage() {
@@ -53,9 +53,13 @@ available_styles=($(ls $DIR/images | sed 's/^/-/'))
 echo -n "
 Dynamic Wallpaper V1.0
 Developed By - Aditya Shakya (@adi1090x)
+-s, --style	=	style name
+-n, --number	=	number of images in theme
+-h, --help	=	show usage
 
-Themes folder: $DIR/images/
-Available options:
+Example: dwall -s=firewatch -n=24
+Styles folder: $DIR/images/
+Available styles:
 "
 printf -- '-%s\n' "${available_styles[@]}"
 }
@@ -66,15 +70,24 @@ init() {
     done
 }
 
-is_valid_style() {
-    available_styles=($(ls $DIR/images | sed 's/^/-/'))
-    for i in "${available_styles[@]}"
-    do
-        [ "$i" == "$1" ] && STYLE=$(echo "$1" | cut -d- -f 2-)
-    done
-}
-
-is_valid_style "$1"
+for i in "$@"
+do
+case $i in
+    -s=*|--style=*)
+    STYLE="${i#*=}"
+    ;;
+    -n=*|--number=*)
+    NUMBER="${i#*=}"
+    ;;
+    -h|--help)
+    usage
+    ;;
+    *)
+    echo -n "Unknown option: $i"
+    usage
+    ;;
+esac
+done
 
 if [ "$STYLE" ]; then
     init
