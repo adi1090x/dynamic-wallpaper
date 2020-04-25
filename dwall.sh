@@ -1,5 +1,6 @@
 #!/usr/bin/env bash
 
+## Contributors : @sdushantha, @megasyl
 ## Author : Aditya Shakya (adi1090x)
 ## Mail : adi1090x@gmail.com
 ## Github : @adi1090x
@@ -36,29 +37,29 @@ case "$OSTYPE" in
 	else SETTER="hsetroot -fill"; fi ;;
 esac
 
-## Available styles
-##
-## bitday, firewatch
 STYLE=
 
 set_wallpaper() {
-    "$SETTER" "$DIR/images/$STYLE/$1.png"
+    $SETTER "$DIR/images/$STYLE/$1.jpg"
 }
 
 main() {
     num=$(($TIME/1))
-    set_wallpaper "$num"; sleep 10
+    set_wallpaper "$num"; sleep 60
 }
 
 usage() {
+available_styles=($(ls $DIR/images | sed 's/^/-/'))
 echo -n "
 Dynamic Wallpaper V1.0
 Developed By - Aditya Shakya (@adi1090x)
 
-Available options:
--bitday		-firewatch
+Styles Dir: $DIR/images
 
 "
+printf "Available options:  "
+printf -- '%s  ' "${available_styles[@]}"
+printf -- '\n\n'
 }
 
 init() {
@@ -68,7 +69,7 @@ init() {
 }
 
 is_valid_style() {
-    available_styles=(-bitday -firewatch)
+    available_styles=($(ls $DIR/images | sed 's/^/-/'))
     for i in "${available_styles[@]}"
     do
         [ "$i" == "$1" ] && STYLE=$(echo "$1" | cut -d- -f 2-)
