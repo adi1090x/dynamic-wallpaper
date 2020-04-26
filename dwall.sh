@@ -41,12 +41,19 @@ NUMBER=24
 
 set_wallpaper() {
   image="$DIR/images/$STYLE/$1"
+  if [ $FORMAT ]; then
+    $SETTER "$image.$FORMAT"
+    return;
+  fi
   errormessage=$($SETTER "$image.png" 2>&1)
   if [ ! -z "$errormessage" ]; then
     errormessage=$($SETTER "$image.jpg" 2>&1)
     if [ ! -z "$errormessage" ]; then
       exit 1;
     fi
+    FORMAT="jpg"
+  else
+    FORMAT="png"
   fi
 }
 
@@ -61,7 +68,8 @@ echo -n "
 Dynamic Wallpaper V1.0
 Developed By - Aditya Shakya (@adi1090x)
 -s, --style	=	style name
--n, --number	=	number of images in theme
+-n, --number	=	number of images in theme (optional)
+-f, --format  = format of images to use (jpg, png) (optional)
 -h, --help	=	show usage
 
 Example: dwall -s=firewatch -n=24
@@ -74,7 +82,7 @@ exit 0
 
 init() {
     while true; do
-        main && exec $DIR/dwall.sh -s=$STYLE -n=$NUMBER
+        main && exec $DIR/dwall.sh -s=$STYLE -n=$NUMBER -f=$FORMAT
     done
 }
 
@@ -86,6 +94,9 @@ case $i in
     ;;
     -n=*|--number=*)
     NUMBER="${i#*=}"
+    ;;
+    -f=*|--format=*)
+    FORMAT="${i#*=}"
     ;;
     -h|--help)
     usage

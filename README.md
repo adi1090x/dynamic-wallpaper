@@ -47,7 +47,8 @@ $ dwall
 Dynamic Wallpaper V1.0
 Developed By - Aditya Shakya (@adi1090x)
 -s, --style	=	style name
--n, --number	=	number of images in theme
+-n, --number	=	number of images in theme (optional)
+-f, --format  = format of images to use (jpg, png) (optional)
 -h, --help	=	show usage
 
 Styles Dir: /usr/share/dynamic-wallpaper/images
