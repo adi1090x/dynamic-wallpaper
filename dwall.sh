@@ -41,8 +41,13 @@ NUMBER=24
 
 set_wallpaper() {
   image="$DIR/images/$STYLE/$1"
-  [[ $(test -f "$image.jpg") ]] && path="$image.jpg" || path="$image.png"
-  $SETTER "$path"
+  errormessage=$($SETTER "$image.png" 2>&1)
+  if [ ! -z "$errormessage" ]; then
+    errormessage=$($SETTER "$image.jpg" 2>&1)
+    if [ ! -z "$errormessage" ]; then
+      exit 1;
+    fi
+  fi
 }
 
 main() {
