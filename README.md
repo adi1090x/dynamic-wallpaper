@@ -20,13 +20,13 @@ Simple `bash` script to set a **Dynamic Wallpaper** according to certain conditi
 ### How to install
 Follow the steps below (You can run `test.sh` to test it before installing it on your system) -
 
-+ Install *hsetroot*, *xrandr(for xfce only)*  
++ Install *feh*, *xrandr(for xfce only)*  
 ```
 # On Archlinux
-sudo pacman -Sy xorg-xrandr hsetroot
+sudo pacman -Sy xorg-xrandr feh
 
 # On Ubuntu or Debian
-sudo apt-get install x11-xserver-utils hsetroot
+sudo apt-get install x11-xserver-utils feh
 ```
 
 + *For swaywm support users must install [oguri](https://github.com/vilhalmer/oguri). The `oguri` daemon must be started for the script to work. `Oguri` can be installed on Arch linux via [AUR](https://aur.archlinux.org/packages/oguri-git/).*
