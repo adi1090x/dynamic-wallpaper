@@ -27,17 +27,16 @@ case "$OSTYPE" in
 	elif [[ "$DESKTOP_SESSION" =~ ^(Xfce Session|xfce session|XFCE|xfce|Xubuntu|xubuntu)$ ]]; then SETTER="xfconf-query --channel xfce4-desktop --property /backdrop/screen$SCREEN/monitor$MONITOR/workspace0/last-image --set";
 	elif [[ "$DESKTOP_SESSION" =~ ^(LXDE|Lxde|lxde)$ ]]; then SETTER="pcmanfm --set-wallpaper";
 	elif [[ "$DESKTOP_SESSION" =~ ^(PANTHEON|Pantheon|pantheon|GNOME|Gnome|gnome|UBUNTU|Ubuntu|ubuntu|DEEPIN|Deepin|deepin)$ ]]; then SETTER="gsettings set org.gnome.desktop.background picture-uri";
-	else SETTER="hsetroot -fill"; fi ;;
+	else SETTER="feh --bg-scale"; fi ;;
 	*) if [ -n "$SWAYSOCK" ]; then SETTER="eval ogurictl output '*' --image";
 	elif [[ "$DESKTOP_SESSION" =~ ^(MATE|Mate|mate)$ ]]; then SETTER="gsettings set org.mate.background picture-filename";
 	elif [[ "$DESKTOP_SESSION" =~ ^(Xfce Session|xfce session|XFCE|xfce|Xubuntu|xubuntu)$ ]]; then SETTER="xfconf-query --channel xfce4-desktop --property /backdrop/screen$SCREEN/monitor$MONITOR/workspace0/last-image --set";
 	elif [[ "$DESKTOP_SESSION" =~ ^(LXDE|Lxde|lxde)$ ]]; then SETTER="pcmanfm --set-wallpaper";
 	elif [[ "$DESKTOP_SESSION" =~ ^(PANTHEON|Pantheon|pantheon|GNOME|Gnome|gnome|UBUNTU|Ubuntu|ubuntu|DEEPIN|Deepin|deepin)$ ]]; then SETTER="gsettings set org.gnome.desktop.background picture-uri";
-	else SETTER="hsetroot -fill"; fi ;;
+	else SETTER="feh --bg-scale"; fi ;;
 esac
 
 STYLE=
-NUMBER=24
 
 set_wallpaper() {
   image="$DIR/images/$STYLE/$1"
@@ -107,6 +106,10 @@ case $i in
     ;;
 esac
 done
+
+if [ -z "$NUMBER" ]; then
+    NUMBER=$(ls $STYLE -1 | wc -l)
+fi
 
 if [ "$STYLE" ]; then
     init
