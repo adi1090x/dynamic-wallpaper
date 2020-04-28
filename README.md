@@ -72,11 +72,11 @@ Available Styles: animecity  bitday  exodus  firewatch  firewatch2  firewatch3  
 + Rename your images(must be **jpg/png**) to `0-24`. If you don't have enough images, symlink them.
 + Run the program and apply it.
 
-**Download :** To not make repo big in size, I've put large wallpapers set to another place & also not everyone wants all the wallpapers. You can download these wallpapers set from here - 
+**More Wallpapers :** To not make repo big in size, I've put large wallpapers set to another place & also not everyone wants all the wallpapers. You can download these wallpapers set from here - 
 <p align="center">
   <a href="https://github.com/adi1090x/files/tree/master/dynamic-wallpaper/wallpapers"><img alt="undefined" src="https://img.shields.io/badge/Download-Here-blue?style=for-the-badge&logo=github"></a>
 </p>
-`Sets` : catalina, london, mojaveHD, mountfuji, surface
+***Sets*** : catalina, london, mojaveHD, mountfuji, surface
 
 ### Previews
 
