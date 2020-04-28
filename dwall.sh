@@ -41,6 +41,7 @@ STYLE=
 set_wallpaper() {
   image="$DIR/images/$STYLE/$1"
   if [ $FORMAT ]; then
+    echo "pute"
     $SETTER "$image.$FORMAT"
     return;
   fi
@@ -57,8 +58,8 @@ set_wallpaper() {
 }
 
 main() {
-  num=$(echo "scale=1; $TIME/24*$NUMBER" | bc | awk '{print int($1+0.5)}')
-    set_wallpaper $num && sleep 10
+  num=$(echo "scale=2; $TIME/24*$NUMBER" | bc | awk '{print int($1+0.5)}')
+  set_wallpaper $num && sleep 10
 }
 
 usage() {
@@ -108,7 +109,7 @@ esac
 done
 
 if [ -z "$NUMBER" ]; then
-    NUMBER=$(ls $STYLE -1 | wc -l)
+    NUMBER=$(ls $DIR/images/$STYLE -1 | wc -l)
 fi
 
 if [ "$STYLE" ]; then
