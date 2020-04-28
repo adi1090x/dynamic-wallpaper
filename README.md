@@ -63,7 +63,7 @@ Available Styles: animecity  bitday  exodus  firewatch  firewatch2  forest  mald
 + User can add their own wallpapers.
 + 10 different types of wallpaper set (HD, UHD).
 + (Currently) Change according to time, throughout the day.
-+ Tested on - **WM:** *Openbox*, *i3wm*, *bspwm*, *Fluxbox*, *Fvwm*, *Swaywm* & **DE:** *Pantheon*, *Gnome(ubuntu)*, *Deepin*, *Cinnamon*, *XFCE*, *LXDE*, *MATE*.
++ Tested on - **WM:** *Openbox*, *i3wm*, *bspwm*, *Fluxbox*, *Fvwm*, *Swaywm* & **DE:** *Pantheon*, *Gnome(ubuntu, pop)*, *Deepin*, *Cinnamon*, *XFCE*, *LXDE*, *MATE*.
 
 ### How to add own wallpapers
 
@@ -74,22 +74,13 @@ Available Styles: animecity  bitday  exodus  firewatch  firewatch2  forest  mald
 
 ### Previews
 
-|Bit day|Firewatch|
-|--|--|
-|![img](https://raw.githubusercontent.com/adi1090x/files/master/dynamic-wallpaper/bitday.gif)|![img](https://raw.githubusercontent.com/adi1090x/files/master/dynamic-wallpaper/firewatch.gif)|
+|Bit day|Firewatch|Anime City|Exodus|Forest|
+|--|--|--|--|--|
+|![img](https://raw.githubusercontent.com/adi1090x/files/master/dynamic-wallpaper/bitday.gif)|![img](https://raw.githubusercontent.com/adi1090x/files/master/dynamic-wallpaper/firewatch.gif)|![img](https://raw.githubusercontent.com/adi1090x/files/master/dynamic-wallpaper/animecity.gif)|![img](https://raw.githubusercontent.com/adi1090x/files/master/dynamic-wallpaper/exodus.gif)|![img](https://raw.githubusercontent.com/adi1090x/files/master/dynamic-wallpaper/forest.gif)|
 
-|Anime City|Exodus|
-|--|--|
-|![img](https://raw.githubusercontent.com/adi1090x/files/master/dynamic-wallpaper/animecity.gif)|![img](https://raw.githubusercontent.com/adi1090x/files/master/dynamic-wallpaper/exodus.gif)|
-
-|Forest|Mojave|
-|--|--|
-|![img](https://raw.githubusercontent.com/adi1090x/files/master/dynamic-wallpaper/forest.gif)|![img](https://raw.githubusercontent.com/adi1090x/files/master/dynamic-wallpaper/mojave.gif)|
-
-|Maldives|Seoul|
-|--|--|
-|![img](https://raw.githubusercontent.com/adi1090x/files/master/dynamic-wallpaper/maldives.gif)|![img](https://raw.githubusercontent.com/adi1090x/files/master/dynamic-wallpaper/seoul.gif)|
-
+|Mojave|Maldives|Seoul|Moon|Firewatch Alt|
+|--|--|--|--|--|
+|![img](https://raw.githubusercontent.com/adi1090x/files/master/dynamic-wallpaper/mojave.gif)|![img](https://raw.githubusercontent.com/adi1090x/files/master/dynamic-wallpaper/maldives.gif)|![img](https://raw.githubusercontent.com/adi1090x/files/master/dynamic-wallpaper/seoul.gif)|![img](https://raw.githubusercontent.com/adi1090x/files/master/dynamic-wallpaper/moon.gif)|![img](https://raw.githubusercontent.com/adi1090x/files/master/dynamic-wallpaper/firewatch3.gif)|
 
 ### Support This Project
 <p align="left">
