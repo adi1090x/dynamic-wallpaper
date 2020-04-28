@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 ## Author : Aditya Shakya (adi1090x)
 ## Mail : adi1090x@gmail.com
@@ -41,7 +41,6 @@ STYLE=
 set_wallpaper() {
   image="$DIR/images/$STYLE/$1"
   if [ $FORMAT ]; then
-    echo "pute"
     $SETTER "$image.$FORMAT"
     return;
   fi
@@ -49,7 +48,7 @@ set_wallpaper() {
   if [ ! -z "$errormessage" ]; then
     errormessage=$($SETTER "$image.jpg" 2>&1)
     if [ ! -z "$errormessage" ]; then
-      exit 1;
+      echo "Image $TIME.jpg/.png Not Available, Exiting..."; exit 1;
     fi
     FORMAT="jpg"
   else
@@ -59,30 +58,32 @@ set_wallpaper() {
 
 main() {
   num=$(echo "scale=2; $TIME/24*$NUMBER" | bc | awk '{print int($1+0.5)}')
-  set_wallpaper $num && sleep 10
+  set_wallpaper $num && sleep 60
+  echo "Running..."
 }
 
 usage() {
-available_styles=($(ls $DIR/images | sed 's/^/-/'))
+available_styles=($(ls $DIR/images))
 echo -n "
-Dynamic Wallpaper V1.0
-Developed By - Aditya Shakya (@adi1090x)
--s, --style	=	style name
--n, --number	=	number of images in theme (optional)
--f, --format  = format of images to use (jpg, png) (optional)
--h, --help	=	show usage
+Dynamic Wallpaper V1.0 - (C) Aditya Shakya - @adi1090x
+Simple script to show a dynamic wallpaper based on time.
 
-Example: dwall -s=firewatch -n=24
+-s=, --style=	Theme/Style name
+-h, --help	Print this help screen
+
+Example: dwall -s=firewatch
+
 Styles folder: $DIR/images/
-Available styles:
+
 "
-printf -- '%s\n' "${available_styles[@]}"
-exit 0
+printf "Available Styles: "
+printf -- '%s  ' "${available_styles[@]}"
+printf -- '\n\n'
 }
 
 init() {
     while true; do
-        main && exec $DIR/dwall.sh -s=$STYLE -n=$NUMBER -f=$FORMAT
+        main && exec $DIR/dwall.sh -s=$STYLE
     done
 }
 
@@ -91,12 +92,6 @@ do
 case $i in
     -s=*|--style=*)
     STYLE="${i#*=}"
-    ;;
-    -n=*|--number=*)
-    NUMBER="${i#*=}"
-    ;;
-    -f=*|--format=*)
-    FORMAT="${i#*=}"
     ;;
     -h|--help)
     usage

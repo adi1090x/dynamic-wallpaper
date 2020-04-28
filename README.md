@@ -44,18 +44,17 @@ chmod +x install.sh
 ```
 $ dwall
 
-Dynamic Wallpaper V1.0
-Developed By - Aditya Shakya (@adi1090x)
--s, --style	=	style name
--n, --number	=	number of images in theme (optional)
--f, --format  = format of images to use (jpg, png) (optional)
--h, --help	=	show usage
+Dynamic Wallpaper V1.0 - (C) Aditya Shakya - @adi1090x
+Simple script to show a dynamic wallpaper based on time.
 
-Styles Dir: /usr/share/dynamic-wallpaper/images
+-s=, --style=	Theme/Style name
+-h, --help	Print this help screen
 
-Example: dwall -s=firewatch -n=24
+Example: dwall -s=firewatch
+
 Styles folder: /usr/share/dynamic-wallpaper/images/
-Available styles:  -animecity  -bitday  -exodus  -firewatch  -firewatch2  -forest  -maldives  -mojave  -moon  -seoul  
+
+Available Styles: animecity  bitday  exodus  firewatch  firewatch2  forest  maldives  mojave  moon  seoul  
 ```
 
 ### Features
@@ -64,13 +63,13 @@ Available styles:  -animecity  -bitday  -exodus  -firewatch  -firewatch2  -fores
 + User can add their own wallpapers.
 + 10 different types of wallpaper set (HD, UHD).
 + (Currently) Change according to time, throughout the day.
-+ Tested on - **WM:** *Openbox*, *i3wm*, *Fluxbox*, *Fvwm*, *Swaywm* & **DE:** *Pantheon*, *Gnome(ubuntu)*, *Deepin*, *Cinnamon*, *XFCE*, *LXDE*, *MATE*.
++ Tested on - **WM:** *Openbox*, *i3wm*, *bspwm*, *Fluxbox*, *Fvwm*, *Swaywm* & **DE:** *Pantheon*, *Gnome(ubuntu)*, *Deepin*, *Cinnamon*, *XFCE*, *LXDE*, *MATE*.
 
 ### How to add own wallpapers
 
 + Download a wallpaper set you like.
 + Make a dir in `/usr/share/dynamic-wallpaper/images`
-+ Rename your images(must be **jpg/png**) to `0-24`. If you have a different count of images, use -n option.
++ Rename your images(must be **jpg/png**) to `0-24`. If you don't have enough images, symlink them.
 + Run the program and apply it.
 
 ### Previews
@@ -105,8 +104,3 @@ Available styles:  -animecity  -bitday  -exodus  -firewatch  -firewatch2  -fores
 + If you can improve it, you're welcome.
 + You can add ***dwall -option &*** to your wm autostart file to set it as wallpaper after login.
 + Have Fun!
-
-### Contributors
-
-+ [@megasyl](https://github.com/megasyl)
-+ [@sdushantha](https://github.com/sdushantha) 
