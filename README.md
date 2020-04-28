@@ -20,13 +20,13 @@ Simple `bash` script to set a **Dynamic Wallpaper** according to certain conditi
 ### How to install
 Follow the steps below (You can run `test.sh` to test it before installing it on your system) -
 
-+ Install *hsetroot*, *xrandr(for xfce only)*  
++ Install *feh*, *xrandr(for xfce only)*  
 ```
 # On Archlinux
-sudo pacman -Sy xorg-xrandr hsetroot
+sudo pacman -Sy xorg-xrandr feh
 
 # On Ubuntu or Debian
-sudo apt-get install x11-xserver-utils hsetroot
+sudo apt-get install x11-xserver-utils feh
 ```
 
 + *For swaywm support users must install [oguri](https://github.com/vilhalmer/oguri). The `oguri` daemon must be started for the script to work. `Oguri` can be installed on Arch linux via [AUR](https://aur.archlinux.org/packages/oguri-git/).*
@@ -46,10 +46,16 @@ $ dwall
 
 Dynamic Wallpaper V1.0
 Developed By - Aditya Shakya (@adi1090x)
+-s, --style	=	style name
+-n, --number	=	number of images in theme (optional)
+-f, --format  = format of images to use (jpg, png) (optional)
+-h, --help	=	show usage
 
 Styles Dir: /usr/share/dynamic-wallpaper/images
 
-Available options:  -animecity  -bitday  -exodus  -firewatch  -firewatch2  -forest  -maldives  -mojave  -moon  -seoul  
+Example: dwall -s=firewatch -n=24
+Styles folder: /usr/share/dynamic-wallpaper/images/
+Available styles:  -animecity  -bitday  -exodus  -firewatch  -firewatch2  -forest  -maldives  -mojave  -moon  -seoul  
 ```
 
 ### Features
@@ -64,7 +70,7 @@ Available options:  -animecity  -bitday  -exodus  -firewatch  -firewatch2  -fore
 
 + Download a wallpaper set you like.
 + Make a dir in `/usr/share/dynamic-wallpaper/images`
-+ Rename your images(must be **jpg**) to `0-24`, if you don't have enough, symlink them.
++ Rename your images(must be **jpg/png**) to `0-24`. If you have a different count of images, use -n option.
 + Run the program and apply it.
 
 ### Previews

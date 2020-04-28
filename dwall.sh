@@ -1,6 +1,5 @@
-#!/usr/bin/env bash
+#!/bin/bash
 
-## Contributors : @sdushantha, @megasyl
 ## Author : Aditya Shakya (adi1090x)
 ## Mail : adi1090x@gmail.com
 ## Github : @adi1090x
@@ -22,30 +21,45 @@ if [ "$OSTYPE" == "linux"* ]; then
     MONITOR="$(xrandr --listactivemonitors | awk -F ' ' 'END {print $2}' | tr -d \*+)"
 fi
 
-case "$OSTYPE" in 
-	linux*) if [ -n "$SWAYSOCK" ]; then SETTER="eval ogurictl output '*' --image"; 
-	elif [[ "$DESKTOP_SESSION" =~ ^(MATE|Mate|mate)$ ]]; then SETTER="gsettings set org.mate.background picture-filename"; 
-	elif [[ "$DESKTOP_SESSION" =~ ^(Xfce Session|xfce session|XFCE|xfce|Xubuntu|xubuntu)$ ]]; then SETTER="xfconf-query --channel xfce4-desktop --property /backdrop/screen$SCREEN/monitor$MONITOR/workspace0/last-image --set"; 
-	elif [[ "$DESKTOP_SESSION" =~ ^(LXDE|Lxde|lxde)$ ]]; then SETTER="pcmanfm --set-wallpaper"; 
-	elif [[ "$DESKTOP_SESSION" =~ ^(PANTHEON|Pantheon|pantheon|GNOME|Gnome|gnome|UBUNTU|Ubuntu|ubuntu|DEEPIN|Deepin|deepin)$ ]]; then SETTER="gsettings set org.gnome.desktop.background picture-uri"; 
-	else SETTER="hsetroot -fill"; fi ;;
-	*) if [ -n "$SWAYSOCK" ]; then SETTER="eval ogurictl output '*' --image"; 
-	elif [[ "$DESKTOP_SESSION" =~ ^(MATE|Mate|mate)$ ]]; then SETTER="gsettings set org.mate.background picture-filename"; 
-	elif [[ "$DESKTOP_SESSION" =~ ^(Xfce Session|xfce session|XFCE|xfce|Xubuntu|xubuntu)$ ]]; then SETTER="xfconf-query --channel xfce4-desktop --property /backdrop/screen$SCREEN/monitor$MONITOR/workspace0/last-image --set"; 
-	elif [[ "$DESKTOP_SESSION" =~ ^(LXDE|Lxde|lxde)$ ]]; then SETTER="pcmanfm --set-wallpaper"; 
-	elif [[ "$DESKTOP_SESSION" =~ ^(PANTHEON|Pantheon|pantheon|GNOME|Gnome|gnome|UBUNTU|Ubuntu|ubuntu|DEEPIN|Deepin|deepin)$ ]]; then SETTER="gsettings set org.gnome.desktop.background picture-uri"; 
-	else SETTER="hsetroot -fill"; fi ;;
+case "$OSTYPE" in
+	linux*) if [ -n "$SWAYSOCK" ]; then SETTER="eval ogurictl output '*' --image";
+	elif [[ "$DESKTOP_SESSION" =~ ^(MATE|Mate|mate)$ ]]; then SETTER="gsettings set org.mate.background picture-filename";
+	elif [[ "$DESKTOP_SESSION" =~ ^(Xfce Session|xfce session|XFCE|xfce|Xubuntu|xubuntu)$ ]]; then SETTER="xfconf-query --channel xfce4-desktop --property /backdrop/screen$SCREEN/monitor$MONITOR/workspace0/last-image --set";
+	elif [[ "$DESKTOP_SESSION" =~ ^(LXDE|Lxde|lxde)$ ]]; then SETTER="pcmanfm --set-wallpaper";
+	elif [[ "$DESKTOP_SESSION" =~ ^(PANTHEON|Pantheon|pantheon|GNOME|Gnome|gnome|UBUNTU|Ubuntu|ubuntu|DEEPIN|Deepin|deepin)$ ]]; then SETTER="gsettings set org.gnome.desktop.background picture-uri";
+	else SETTER="feh --bg-scale"; fi ;;
+	*) if [ -n "$SWAYSOCK" ]; then SETTER="eval ogurictl output '*' --image";
+	elif [[ "$DESKTOP_SESSION" =~ ^(MATE|Mate|mate)$ ]]; then SETTER="gsettings set org.mate.background picture-filename";
+	elif [[ "$DESKTOP_SESSION" =~ ^(Xfce Session|xfce session|XFCE|xfce|Xubuntu|xubuntu)$ ]]; then SETTER="xfconf-query --channel xfce4-desktop --property /backdrop/screen$SCREEN/monitor$MONITOR/workspace0/last-image --set";
+	elif [[ "$DESKTOP_SESSION" =~ ^(LXDE|Lxde|lxde)$ ]]; then SETTER="pcmanfm --set-wallpaper";
+	elif [[ "$DESKTOP_SESSION" =~ ^(PANTHEON|Pantheon|pantheon|GNOME|Gnome|gnome|UBUNTU|Ubuntu|ubuntu|DEEPIN|Deepin|deepin)$ ]]; then SETTER="gsettings set org.gnome.desktop.background picture-uri";
+	else SETTER="feh --bg-scale"; fi ;;
 esac
 
 STYLE=
 
 set_wallpaper() {
-    $SETTER "$DIR/images/$STYLE/$1.jpg"
+  image="$DIR/images/$STYLE/$1"
+  if [ $FORMAT ]; then
+    echo "pute"
+    $SETTER "$image.$FORMAT"
+    return;
+  fi
+  errormessage=$($SETTER "$image.png" 2>&1)
+  if [ ! -z "$errormessage" ]; then
+    errormessage=$($SETTER "$image.jpg" 2>&1)
+    if [ ! -z "$errormessage" ]; then
+      exit 1;
+    fi
+    FORMAT="jpg"
+  else
+    FORMAT="png"
+  fi
 }
 
 main() {
-    num=$(($TIME/1))
-    set_wallpaper "$num" && sleep 60
+  num=$(echo "scale=2; $TIME/24*$NUMBER" | bc | awk '{print int($1+0.5)}')
+  set_wallpaper $num && sleep 10
 }
 
 usage() {
@@ -53,30 +67,50 @@ available_styles=($(ls $DIR/images | sed 's/^/-/'))
 echo -n "
 Dynamic Wallpaper V1.0
 Developed By - Aditya Shakya (@adi1090x)
+-s, --style	=	style name
+-n, --number	=	number of images in theme (optional)
+-f, --format  = format of images to use (jpg, png) (optional)
+-h, --help	=	show usage
 
-Styles Dir: $DIR/images
-
+Example: dwall -s=firewatch -n=24
+Styles folder: $DIR/images/
+Available styles:
 "
-printf "Available options:  "
-printf -- '%s  ' "${available_styles[@]}"
-printf -- '\n\n'
+printf -- '%s\n' "${available_styles[@]}"
+exit 0
 }
 
 init() {
     while true; do
-        main && exec $DIR/dwall.sh -$STYLE
+        main && exec $DIR/dwall.sh -s=$STYLE -n=$NUMBER -f=$FORMAT
     done
 }
 
-is_valid_style() {
-    available_styles=($(ls $DIR/images | sed 's/^/-/'))
-    for i in "${available_styles[@]}"
-    do
-        [ "$i" == "$1" ] && STYLE=$(echo "$1" | cut -d- -f 2-)
-    done
-}
+for i in "$@"
+do
+case $i in
+    -s=*|--style=*)
+    STYLE="${i#*=}"
+    ;;
+    -n=*|--number=*)
+    NUMBER="${i#*=}"
+    ;;
+    -f=*|--format=*)
+    FORMAT="${i#*=}"
+    ;;
+    -h|--help)
+    usage
+    ;;
+    *)
+    echo -n "Unknown option: $i"
+    usage
+    ;;
+esac
+done
 
-is_valid_style "$1"
+if [ -z "$NUMBER" ]; then
+    NUMBER=$(ls $DIR/images/$STYLE -1 | wc -l)
+fi
 
 if [ "$STYLE" ]; then
     init
