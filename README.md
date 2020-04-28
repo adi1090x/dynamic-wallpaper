@@ -54,14 +54,14 @@ Example: dwall -s=firewatch
 
 Styles folder: /usr/share/dynamic-wallpaper/images/
 
-Available Styles: animecity  bitday  exodus  firewatch  firewatch2  forest  maldives  mojave  moon  seoul  
+Available Styles: animecity  bitday  exodus  firewatch  firewatch2  firewatch3  forest  maldives  mojave  moon  seoul  
 ```
 
 ### Features
 
 + Dynamic style selection.
 + User can add their own wallpapers.
-+ 10 different types of wallpaper set (HD, UHD).
++ 11[+](https://github.com/adi1090x/files/tree/master/dynamic-wallpaper/wallpapers) different types of wallpaper set (HD, UHD).
 + (Currently) Change according to time, throughout the day.
 + Tested on - **WM:** *Openbox*, *i3wm*, *bspwm*, *Fluxbox*, *Fvwm*, *Swaywm* & **DE:** *Pantheon*, *Gnome(ubuntu, pop)*, *Deepin*, *Cinnamon*, *XFCE*, *LXDE*, *MATE*.
 
@@ -71,6 +71,12 @@ Available Styles: animecity  bitday  exodus  firewatch  firewatch2  forest  mald
 + Make a dir in `/usr/share/dynamic-wallpaper/images`
 + Rename your images(must be **jpg/png**) to `0-24`. If you don't have enough images, symlink them.
 + Run the program and apply it.
+
+**Download :** To not make repo big in size, I've put large wallpapers set to another place & also not everyone wants all the wallpapers. You can download these wallpapers set from here - 
+<p align="center">
+  <a href="https://github.com/adi1090x/files/tree/master/dynamic-wallpaper/wallpapers"><img alt="undefined" src="https://img.shields.io/badge/Download-Here-blue?style=for-the-badge&logo=github"></a>
+</p>
+`Sets` : catalina, london, mojaveHD, mountfuji, surface
 
 ### Previews
 
@@ -93,5 +99,5 @@ Available Styles: animecity  bitday  exodus  firewatch  firewatch2  forest  mald
 
 + Currently, KDE is not supported.
 + If you can improve it, you're welcome.
-+ You can add ***dwall -option &*** to your wm autostart file to set it as wallpaper after login.
++ You can add ***dwall -s=style &*** to your wm autostart file to set it as wallpaper after login.
 + Have Fun!
