@@ -40,19 +40,18 @@ STYLE=
 
 set_wallpaper() {
   image="$DIR/images/$STYLE/$1"
+
+  if [ -f "$image.png" ]; then
+      FORMAT="png"
+  elif [ -f "$image.jpg" ]; then
+      FORMAT="jpg"
+  else
+    echo "Image $TIME.jpg/.png Not Available, Exiting..."; exit 1;
+  fi
+
   if [ $FORMAT ]; then
     $SETTER "$image.$FORMAT"
     return;
-  fi
-  errormessage=$($SETTER "$image.png" 2>&1)
-  if [ ! -z "$errormessage" ]; then
-    errormessage=$($SETTER "$image.jpg" 2>&1)
-    if [ ! -z "$errormessage" ]; then
-      echo "Image $TIME.jpg/.png Not Available, Exiting..."; exit 1;
-    fi
-    FORMAT="jpg"
-  else
-    FORMAT="png"
   fi
 }
 
@@ -63,22 +62,22 @@ main() {
 }
 
 usage() {
-available_styles=($(ls $DIR/images))
-echo -n "
-Dynamic Wallpaper V1.0 - (C) Aditya Shakya - @adi1090x
-Simple script to show a dynamic wallpaper based on time.
+  available_styles=($(ls $DIR/images))
+  echo -n "
+  Dynamic Wallpaper V1.0 - (C) Aditya Shakya - @adi1090x
+  Simple script to show a dynamic wallpaper based on time.
 
--s=, --style=	Theme/Style name
--h, --help	Print this help screen
+  -s=, --style=	Theme/Style name
+  -h, --help	Print this help screen
 
-Example: dwall -s=firewatch
+  Example: dwall -s=firewatch
 
-Styles folder: $DIR/images/
+  Styles folder: $DIR/images/
 
-"
-printf "Available Styles: "
-printf -- '%s  ' "${available_styles[@]}"
-printf -- '\n\n'
+  "
+  printf "Available Styles: "
+  printf -- '%s  ' "${available_styles[@]}"
+  printf -- '\n\n'
 }
 
 init() {
