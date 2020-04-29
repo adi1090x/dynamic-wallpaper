@@ -124,7 +124,7 @@ for i in "$@"; do
 			echo -n "Unknown option: $i"
 			usage
 			exit
-		;;
+			;;
 	esac
 done
 
