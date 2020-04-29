@@ -5,6 +5,8 @@
 ## Github : @adi1090x
 ## Reddit : @adi1090x
 
+set -o shwordsplit 2>/dev/null
+
 case "$OSTYPE" in
 	linux*) DIR="$(pwd)" ;;
 	*) DIR="$(pwd)" ;;
