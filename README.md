@@ -48,6 +48,7 @@ Dynamic Wallpaper V1.0 - (C) Aditya Shakya - @adi1090x
 Simple script to show a dynamic wallpaper based on time.
 
 -s=, --style=	Theme/Style name
+-o, --once  Set the wallpaper once and exit.
 -h, --help	Print this help screen
 
 Example: dwall -s=firewatch

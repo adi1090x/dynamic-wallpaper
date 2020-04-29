@@ -38,6 +38,8 @@ esac
 
 STYLE=
 
+RUN_ONCE=false
+
 set_wallpaper() {
   image="$DIR/images/$STYLE/$1"
   if [ $FORMAT ]; then
@@ -58,8 +60,7 @@ set_wallpaper() {
 
 main() {
   num=$(echo "scale=2; $TIME/24*$NUMBER" | bc | awk '{print int($1+0.5)}')
-  set_wallpaper $num && sleep 60
-  echo "Running..."
+  set_wallpaper $num
 }
 
 usage() {
@@ -69,6 +70,7 @@ Dynamic Wallpaper V1.0 - (C) Aditya Shakya - @adi1090x
 Simple script to show a dynamic wallpaper based on time.
 
 -s=, --style=	Theme/Style name
+-o, --once  Set the wallpaper once and exit.
 -h, --help	Print this help screen
 
 Example: dwall -s=firewatch
@@ -82,8 +84,12 @@ printf -- '\n\n'
 }
 
 init() {
+    if [ "$RUN_ONCE" == "true" ]; then
+      main;
+      exit 0;
+    fi
     while true; do
-        main && exec $DIR/dwall.sh -s=$STYLE
+        main && sleep 60 && echo "Running..." && exec $DIR/dwall.sh -s=$STYLE
     done
 }
 
@@ -92,6 +98,9 @@ do
 case $i in
     -s=*|--style=*)
     STYLE="${i#*=}"
+    ;;
+    -o|--once)
+    RUN_ONCE=true
     ;;
     -h|--help)
     usage
