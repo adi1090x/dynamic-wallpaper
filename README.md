@@ -21,7 +21,7 @@ Simple `bash` script to set a **Dynamic Wallpaper** according to certain conditi
 Follow the steps below (You can run `test.sh` to test it before installing it on your system) -
 
 + Install *feh*, *xrandr(for xfce only)*  
-```
+```bash
 # On Archlinux
 sudo pacman -Sy xorg-xrandr feh
 
@@ -32,7 +32,7 @@ sudo apt-get install x11-xserver-utils feh
 + *For swaywm support users must install [oguri](https://github.com/vilhalmer/oguri). The `oguri` daemon must be started for the script to work. `Oguri` can be installed on Arch linux via [AUR](https://aur.archlinux.org/packages/oguri-git/).*
 
 + Clone this repository and...
-```
+```bash
 cd $HOME
 git clone https://github.com/adi1090x/dynamic-wallpaper.git
 cd dynamic-wallpaper
@@ -41,7 +41,7 @@ chmod +x install.sh
 ```
 
 + Run the program and choose an option
-```
+```bash
 $ dwall
 
 Dynamic Wallpaper V1.0
@@ -103,9 +103,11 @@ maldives  mall  mojave  moon  room  seoul  street  street2  surface  tokyostreet
 ### Common Issues
 
 1. Wallpaper not changing
+
 If your wallpaper is not changing, then open an issue and show me the output of `echo $DESKTOP_SESSION`.
 
 2. Not working on XFCE
+
 If this script is not working on xfce, then open the terminal and run `xfconf-query -c xfce4-desktop -m` and change the wallpaper (any) via *xfce4-settings-manager*. <br />
 In terminal, *xfconf-query* will print lines starting with `set:`, which show which properties have been changed, check `screen` & `monitor` values and modify the script accordingly.
 ```bash
