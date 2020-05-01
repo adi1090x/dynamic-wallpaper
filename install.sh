@@ -15,7 +15,7 @@ DIR="$(pwd)"
 case "$OSTYPE" in
 	linux*)
 		DES="/usr/share"
-		;; 
+		;;
 	*)
 		DES="/usr/share"
 		;;
@@ -24,7 +24,7 @@ esac
 case "$OSTYPE" in
 	linux*)
 		BIN="/usr/bin"
-		;; 
+		;;
 	*)
 		BIN="/usr/bin"
 		;;
@@ -33,7 +33,7 @@ esac
 case "$OSTYPE" in
 	linux*)
 		SUDO="sudo"
-		;; 
+		;;
 	*)
 		SUDO="sudo"
 		;;
@@ -44,13 +44,13 @@ echo -e $Y" [*] Installing... "$C
 echo
 # delete old dir if already exist
 if [[ -d $DES/dynamic-wallpaper ]]; then
-	$SUDO rm -rf $DES/dynamic-wallpaper    
+	$SUDO rm -rf $DES/dynamic-wallpaper
 fi
 $SUDO mkdir -p $DES/dynamic-wallpaper && $SUDO cp -r $DIR/images $DES/dynamic-wallpaper && $SUDO cp -r $DIR/dwall.sh $DES/dynamic-wallpaper
 $SUDO chmod +x $DES/dynamic-wallpaper/dwall.sh
 # delete executable if already exist
 if [[ -f $BIN/dwall ]]; then
-	$SUDO rm $BIN/dwall    
+	$SUDO rm $BIN/dwall
 fi
 $SUDO ln -s $DES/dynamic-wallpaper/dwall.sh $BIN/dwall
 echo
