@@ -17,6 +17,21 @@ W='\033[1;37m'
 # zsh fix
 set -o shwordsplit 2>/dev/null
 
+# set wallpaper in kde
+setkde() {
+qdbus org.kde.plasmashell /PlasmaShell org.kde.PlasmaShell.evaluateScript "
+    var allDesktops = desktops();
+    print (allDesktops);
+    for (i=0;i<allDesktops.length;i++) {
+        d = allDesktops[i];
+        d.wallpaperPlugin = 'org.kde.image';
+        d.currentConfigGroup = Array('Wallpaper',
+                                    'org.kde.image',
+                                    'General');
+        d.writeConfig('Image', 'file://"$1"')
+    }"
+}
+
 case "$OSTYPE" in
 	linux*)
 			DIR="$(pwd)"
@@ -51,6 +66,8 @@ case "$OSTYPE" in
 				SETTER="xfconf-query --channel xfce4-desktop --property /backdrop/screen$SCREEN/monitor$MONITOR/workspace0/last-image --set";
 			elif [[ "$DESKTOP_SESSION" =~ ^(LXDE|Lxde|lxde)$ ]]; then 
 				SETTER="pcmanfm --set-wallpaper";
+            elif [[ "$DESKTOP_SESSION" =~ ^(/usr/share/xsessions/plasma|NEON|Neon|neon|PLASMA|Plasma|plasma|KDE|Kde|kde)$ ]]; then 
+				SETTER=setkde;
 			elif [[ "$DESKTOP_SESSION" =~ ^(PANTHEON|Pantheon|pantheon|GNOME|Gnome|gnome|UBUNTU|Ubuntu|ubuntu|DEEPIN|Deepin|deepin|POP|Pop|pop)$ ]]; then 
 				SETTER="gsettings set org.gnome.desktop.background picture-uri";
 			else 
@@ -66,6 +83,8 @@ case "$OSTYPE" in
 				SETTER="xfconf-query --channel xfce4-desktop --property /backdrop/screen$SCREEN/monitor$MONITOR/workspace0/last-image --set";
 			elif [[ "$DESKTOP_SESSION" =~ ^(LXDE|Lxde|lxde)$ ]]; then 
 				SETTER="pcmanfm --set-wallpaper";
+            elif [[ "$DESKTOP_SESSION" =~ ^(/usr/share/xsessions/plasma|NEON|Neon|neon|PLASMA|Plasma|plasma|KDE|Kde|kde)$ ]]; then 
+				SETTER=setkde;
 			elif [[ "$DESKTOP_SESSION" =~ ^(PANTHEON|Pantheon|pantheon|GNOME|Gnome|gnome|UBUNTU|Ubuntu|ubuntu|DEEPIN|Deepin|deepin|POP|Pop|pop)$ ]]; then 
 				SETTER="gsettings set org.gnome.desktop.background picture-uri";
 			else 

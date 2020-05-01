@@ -65,7 +65,7 @@ Available styles/themes:  bitday  exodus  firewatch  firewatch2  firewatch3  for
 + User can add their own wallpapers.
 + 11[+](https://github.com/adi1090x/files/tree/master/dynamic-wallpaper/wallpapers) different types of wallpaper set (HD, UHD).
 + (Currently) Change according to time, throughout the day.
-+ Tested on - **WM:** *Openbox*, *i3wm*, *bspwm*, *awesomewm*, *Fluxbox*, *Fvwm*, *Swaywm* & **DE:** *Pantheon*, *Gnome(ubuntu, pop)*, *Deepin*, *Cinnamon*, *XFCE*, *LXDE*, *MATE*.
++ Tested on - **WM:** *Openbox*, *i3wm*, *bspwm*, *awesomewm*, *Fluxbox*, *Fvwm*, *Swaywm* & **DE:** *KDE(neon)*, *Pantheon*, *Gnome(ubuntu, pop)*, *Deepin*, *Cinnamon*, *XFCE*, *LXDE*, *MATE*.
 
 ### How to add own wallpapers
 
@@ -100,7 +100,6 @@ Available styles/themes:  bitday  exodus  firewatch  firewatch2  firewatch3  for
 
 ### FYI
 
-+ Currently, KDE is not supported.
 + If you can improve it, you're welcome.
 + You can add ***dwall -s style &*** to your wm autostart file to set it as wallpaper after login.
 + Have Fun!
