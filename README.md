@@ -100,6 +100,7 @@ Available styles/themes:  bitday  exodus  firewatch  firewatch2  firewatch3  for
 
 ### FYI
 
++ In KDE, it changes the wallpaper in all the Activities.
 + If you can improve it, you're welcome.
 + You can add ***dwall -s style &*** to your wm autostart file to set it as wallpaper after login.
 + Have Fun!
