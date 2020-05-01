@@ -48,22 +48,23 @@ Dynamic Wallpaper V1.0
 Simple program to set a dynamic desktop background based on current time.
 Developed By - Aditya Shakya (@adi1090x)
 
-usage: dwall [-s] style [-o] style [-h]
+usage: ./test.sh [-s] style [-o] style [-h]
 
--s     style     name of theme/style.
--o     style     Run once and exit, useful for schedulers (cron).
--h     help      show this usage/help message.
+-s  style     name of theme/style.
+-o  style     Run once and exit, useful for schedulers (cron).
+-h  help      show this usage/help message.
 
-Styles Dir: /usr/share/dynamic-wallpaper/images
+Styles Dir: /home/aditya/adi1090x/dynamic-wallpaper/images
 
-Available styles/themes:  bitday  exodus  firewatch  firewatch2  firewatch3  forest  maldives  mojave  moon  seoul  tokyostreet  
+Available styles/themes:  bitday  exodus  firewatch  firewatch2  firewatch3  forest  home
+maldives  mall  mojave  moon  room  seoul  street  street2  surface  tokyostreet  
 ```
 
 ### Features
 
 + Dynamic style selection.
 + User can add their own wallpapers.
-+ 11[+](https://github.com/adi1090x/files/tree/master/dynamic-wallpaper/wallpapers) different types of wallpaper set (HD, UHD).
++ 17[+](https://github.com/adi1090x/files/tree/master/dynamic-wallpaper/wallpapers) different types of wallpaper set (HD, UHD).
 + (Currently) Change according to time, throughout the day.
 + Tested on - **WM:** *Openbox*, *i3wm*, *bspwm*, *awesomewm*, *Fluxbox*, *Fvwm*, *Swaywm* & **DE:** *KDE(neon)*, *Pantheon*, *Gnome(ubuntu, pop)*, *Deepin*, *Cinnamon*, *XFCE*, *LXDE*, *MATE*.
 
@@ -98,6 +99,23 @@ Available styles/themes:  bitday  exodus  firewatch  firewatch2  firewatch3  for
 |Street|Street Alt|Surface|Tokyo Streets|
 |--|--|--|--|
 |![img](https://raw.githubusercontent.com/adi1090x/files/master/dynamic-wallpaper/street.gif)|![img](https://raw.githubusercontent.com/adi1090x/files/master/dynamic-wallpaper/street2.gif)|![img](https://raw.githubusercontent.com/adi1090x/files/master/dynamic-wallpaper/surface.gif)|![img](https://raw.githubusercontent.com/adi1090x/files/master/dynamic-wallpaper/tokyostreet.gif)|
+
+### Common Issues
+
+1. Wallpaper not changing
+If your wallpaper is not changing, then open an issue and show me the output of `echo $DESKTOP_SESSION`.
+
+2. Not working on XFCE
+If this script is not working on xfce, then open the terminal and run `xfconf-query -c xfce4-desktop -m` and change the wallpaper (any) via *xfce4-settings-manager*. <br />
+In terminal, *xfconf-query* will print lines starting with `set:`, which show which properties have been changed, check `screen` & `monitor` values and modify the script accordingly.
+```bash
+53   ## For XFCE
+54   if [[ "$OSTYPE" == "linux"* ]]; then
+55   	 SCREEN="0"
+56       MONITOR="1"
+57   fi
+
+```
 
 ### Support This Project
 <p align="left">
