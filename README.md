@@ -83,7 +83,7 @@ Available styles/themes:  bitday  exodus  firewatch  firewatch2  firewatch3  for
 
 ### Previews
 
-|Bit day|Firewatch|Anime City|Exodus|Forest|
+|Bit day|Firewatch|Tokyo Street|Exodus|Forest|
 |--|--|--|--|--|
 |![img](https://raw.githubusercontent.com/adi1090x/files/master/dynamic-wallpaper/bitday.gif)|![img](https://raw.githubusercontent.com/adi1090x/files/master/dynamic-wallpaper/firewatch.gif)|![img](https://raw.githubusercontent.com/adi1090x/files/master/dynamic-wallpaper/animecity.gif)|![img](https://raw.githubusercontent.com/adi1090x/files/master/dynamic-wallpaper/exodus.gif)|![img](https://raw.githubusercontent.com/adi1090x/files/master/dynamic-wallpaper/forest.gif)|
 
