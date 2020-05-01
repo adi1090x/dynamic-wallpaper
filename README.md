@@ -44,17 +44,19 @@ chmod +x install.sh
 ```
 $ dwall
 
-Dynamic Wallpaper V1.0 - (C) Aditya Shakya - @adi1090x
-Simple script to show a dynamic wallpaper based on time.
+Dynamic Wallpaper V1.0
+Simple program to set a dynamic desktop background based on current time.
+Developed By - Aditya Shakya (@adi1090x)
 
--s=, --style=	Theme/Style name
--h, --help	Print this help screen
+usage: dwall [-s] style [-o] style [-h]
 
-Example: dwall -s=firewatch
+-s     style     name of theme/style.
+-o     style     Run once and exit, useful for schedulers (cron).
+-h     help      show this usage/help message.
 
-Styles folder: /usr/share/dynamic-wallpaper/images/
+Styles Dir: /usr/share/dynamic-wallpaper/images
 
-Available Styles: animecity  bitday  exodus  firewatch  firewatch2  firewatch3  forest  maldives  mojave  moon  seoul  
+Available styles/themes:  animecity  bitday  exodus  firewatch  firewatch2  firewatch3  forest  maldives  mojave  moon  seoul  
 ```
 
 ### Features
@@ -63,13 +65,13 @@ Available Styles: animecity  bitday  exodus  firewatch  firewatch2  firewatch3  
 + User can add their own wallpapers.
 + 11[+](https://github.com/adi1090x/files/tree/master/dynamic-wallpaper/wallpapers) different types of wallpaper set (HD, UHD).
 + (Currently) Change according to time, throughout the day.
-+ Tested on - **WM:** *Openbox*, *i3wm*, *bspwm*, *Fluxbox*, *Fvwm*, *Swaywm* & **DE:** *Pantheon*, *Gnome(ubuntu, pop)*, *Deepin*, *Cinnamon*, *XFCE*, *LXDE*, *MATE*.
++ Tested on - **WM:** *Openbox*, *i3wm*, *bspwm*, *awesomewm*, *Fluxbox*, *Fvwm*, *Swaywm* & **DE:** *Pantheon*, *Gnome(ubuntu, pop)*, *Deepin*, *Cinnamon*, *XFCE*, *LXDE*, *MATE*.
 
 ### How to add own wallpapers
 
 + Download a wallpaper set you like.
 + Make a dir in `/usr/share/dynamic-wallpaper/images`
-+ Rename your images(must be **jpg/png**) to `0-24`. If you don't have enough images, symlink them.
++ Rename your images(must be **jpg/png**) to `0-23`. If you don't have enough images, symlink them.
 + Run the program and apply it.
 
 **More Wallpapers :** To not make repo big in size, I've put large wallpapers set to another place & also not everyone wants all the wallpapers. You can download these wallpapers set from here - 
@@ -100,5 +102,5 @@ Available Styles: animecity  bitday  exodus  firewatch  firewatch2  firewatch3  
 
 + Currently, KDE is not supported.
 + If you can improve it, you're welcome.
-+ You can add ***dwall -s=style &*** to your wm autostart file to set it as wallpaper after login.
++ You can add ***dwall -s style &*** to your wm autostart file to set it as wallpaper after login.
 + Have Fun!
