@@ -102,13 +102,9 @@ maldives  mall  mojave  moon  room  seoul  street  street2  surface  tokyostreet
 
 ### Common Issues
 
-1. Wallpaper not changing
+1. **Wallpaper not changing** : If your wallpaper is not changing, then open an issue and show me the output of `echo $DESKTOP_SESSION`.
 
-If your wallpaper is not changing, then open an issue and show me the output of `echo $DESKTOP_SESSION`.
-
-2. Not working on XFCE
-
-If this script is not working on xfce, then open the terminal and run `xfconf-query -c xfce4-desktop -m` and change the wallpaper (any) via *xfce4-settings-manager*. <br />
+2. **Not working on XFCE** : If this script is not working on xfce, then open the terminal and run `xfconf-query -c xfce4-desktop -m` and change the wallpaper (any) via *xfce4-settings-manager*. <br />
 In terminal, *xfconf-query* will print lines starting with `set:`, which show which properties have been changed, check `screen` & `monitor` values and modify the script accordingly.
 ```bash
 53   ## For XFCE
