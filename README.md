@@ -56,7 +56,7 @@ usage: dwall [-s] style [-o] style [-h]
 
 Styles Dir: /usr/share/dynamic-wallpaper/images
 
-Available styles/themes:  animecity  bitday  exodus  firewatch  firewatch2  firewatch3  forest  maldives  mojave  moon  seoul  
+Available styles/themes:  bitday  exodus  firewatch  firewatch2  firewatch3  forest  maldives  mojave  moon  seoul  tokyostreet  
 ```
 
 ### Features
