@@ -83,13 +83,21 @@ Available styles/themes:  bitday  exodus  firewatch  firewatch2  firewatch3  for
 
 ### Previews
 
-|Bit day|Firewatch|Tokyo Street|Exodus|Forest|
-|--|--|--|--|--|
-|![img](https://raw.githubusercontent.com/adi1090x/files/master/dynamic-wallpaper/bitday.gif)|![img](https://raw.githubusercontent.com/adi1090x/files/master/dynamic-wallpaper/firewatch.gif)|![img](https://raw.githubusercontent.com/adi1090x/files/master/dynamic-wallpaper/animecity.gif)|![img](https://raw.githubusercontent.com/adi1090x/files/master/dynamic-wallpaper/exodus.gif)|![img](https://raw.githubusercontent.com/adi1090x/files/master/dynamic-wallpaper/forest.gif)|
+|Bit Day|Exodus|Firewatch|Firewatch Alt|
+|--|--|--|--|
+|![img](https://raw.githubusercontent.com/adi1090x/files/master/dynamic-wallpaper/bitday.gif)|![img](https://raw.githubusercontent.com/adi1090x/files/master/dynamic-wallpaper/exodus.gif)|![img](https://raw.githubusercontent.com/adi1090x/files/master/dynamic-wallpaper/firewatch.gif)|![img](https://raw.githubusercontent.com/adi1090x/files/master/dynamic-wallpaper/firewatch3.gif)|
 
-|Mojave|Maldives|Seoul|Moon|Firewatch Alt|
-|--|--|--|--|--|
-|![img](https://raw.githubusercontent.com/adi1090x/files/master/dynamic-wallpaper/mojave.gif)|![img](https://raw.githubusercontent.com/adi1090x/files/master/dynamic-wallpaper/maldives.gif)|![img](https://raw.githubusercontent.com/adi1090x/files/master/dynamic-wallpaper/seoul.gif)|![img](https://raw.githubusercontent.com/adi1090x/files/master/dynamic-wallpaper/moon.gif)|![img](https://raw.githubusercontent.com/adi1090x/files/master/dynamic-wallpaper/firewatch3.gif)|
+|Forest|Home|Maldives|Mall|
+|--|--|--|--|
+|![img](https://raw.githubusercontent.com/adi1090x/files/master/dynamic-wallpaper/forest.gif)|![img](https://raw.githubusercontent.com/adi1090x/files/master/dynamic-wallpaper/home.gif)|![img](https://raw.githubusercontent.com/adi1090x/files/master/dynamic-wallpaper/maldives.gif)|![img](https://raw.githubusercontent.com/adi1090x/files/master/dynamic-wallpaper/mall.gif)|
+
+|Mojave|Moon|Room|Seoul|
+|--|--|--|--|
+|![img](https://raw.githubusercontent.com/adi1090x/files/master/dynamic-wallpaper/mojave.gif)|![img](https://raw.githubusercontent.com/adi1090x/files/master/dynamic-wallpaper/moon.gif)|![img](https://raw.githubusercontent.com/adi1090x/files/master/dynamic-wallpaper/room.gif)|![img](https://raw.githubusercontent.com/adi1090x/files/master/dynamic-wallpaper/seoul.gif)|
+
+|Street|Street Alt|Surface|Tokyo Streets|
+|--|--|--|--|
+|![img](https://raw.githubusercontent.com/adi1090x/files/master/dynamic-wallpaper/street.gif)|![img](https://raw.githubusercontent.com/adi1090x/files/master/dynamic-wallpaper/street2.gif)|![img](https://raw.githubusercontent.com/adi1090x/files/master/dynamic-wallpaper/surface.gif)|![img](https://raw.githubusercontent.com/adi1090x/files/master/dynamic-wallpaper/tokyostreet.gif)|
 
 ### Support This Project
 <p align="left">

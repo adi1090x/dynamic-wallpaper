@@ -125,9 +125,9 @@ usage() {
 	echo
 	echo -e $B"usage: ./test.sh [-s] style [-o] style [-h]"
 	echo
-	echo -e $M"-s     style     name of theme/style."
-	echo -e $M"-o     style     Run once and exit, useful for schedulers (cron)."
-	echo -e $M"-h     help      show this usage/help message."
+	echo -e $M"-s  style     name of theme/style."
+	echo -e $M"-o  style     Run once and exit, useful for schedulers (cron)."
+	echo -e $M"-h  help      show this usage/help message."
 	echo
  	echo -e $C"Styles Dir: $DIR/images"
 	echo
