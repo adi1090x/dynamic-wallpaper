@@ -51,7 +51,7 @@ case "$OSTYPE" in
 esac
 
 ## For XFCE
-if [ "$OSTYPE" == "linux"* ]; then
+if [[ "$OSTYPE" == "linux"* ]]; then
 	SCREEN="$(xrandr --listactivemonitors | awk -F ' ' 'END {print $1}' | tr -d \:)"
     MONITOR="$(xrandr --listactivemonitors | awk -F ' ' 'END {print $2}' | tr -d \*+)"
 fi
