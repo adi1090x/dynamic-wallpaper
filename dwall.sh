@@ -19,17 +19,21 @@ set -o shwordsplit 2>/dev/null
 
 # set wallpaper in kde
 setkde() {
-qdbus org.kde.plasmashell /PlasmaShell org.kde.PlasmaShell.evaluateScript "
-    var allDesktops = desktops();
-    print (allDesktops);
-    for (i=0;i<allDesktops.length;i++) {
-        d = allDesktops[i];
-        d.wallpaperPlugin = 'org.kde.image';
-        d.currentConfigGroup = Array('Wallpaper',
-                                    'org.kde.image',
-                                    'General');
-        d.writeConfig('Image', 'file://"$1"')
-    }"
+if [[ "$KDEWM" =~ ^/usr/bin/kwin ]]; then
+    qdbus org.kde.plasmashell /PlasmaShell org.kde.PlasmaShell.evaluateScript "
+	var allDesktops = desktops();
+	print (allDesktops);
+	for (i=0;i<allDesktops.length;i++) {
+	    d = allDesktops[i];
+	    d.wallpaperPlugin = 'org.kde.image';
+	    d.currentConfigGroup = Array('Wallpaper',
+					'org.kde.image',
+					'General');
+	    d.writeConfig('Image', 'file://"$1"')
+	}"
+else
+    feh --bg-scale $1;
+fi
 }
 
 case "$OSTYPE" in
