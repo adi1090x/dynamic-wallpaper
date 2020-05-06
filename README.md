@@ -115,6 +115,32 @@ In terminal, *xfconf-query* will print lines starting with `set:`, which show wh
 
 ```
 
+3. **Autostart** : If you want to autostart the script with desktop, you can add it to your WM autostart file & if doesn't work for you, you can create a `desktop file` in `$HOME/.config/autostart` dir.
+```
+cd $HOME/.config/autostart && touch dwall.desktop
+
+# Add this to dwall.desktop file
+
+[Desktop Entry]
+Name=Dynamic Wallpaper
+Comment=Simple script, shows a Dynamic Wallpaper based on TIME.
+Exec=/usr/bin/dwall -s firewatch &
+Type=Application
+Icon=wallpaper
+Categories=Accessories;
+```
+
+4. **Cronjob** : If you want to run it with cron, you may need to define these environment variables, 
+
++ SHELL
++ DISPLAY
++ DESKTOP_SESSION
++ XDG_RUNTIME_DIR
++ XDG_DATA_DIRS
++ DBUS_SESSION_BUS_ADDRESS
+
+> You can find what values your environment has by typing `env` in your terminal or check each variable via `echo $VARIABLE_NAME`.
+
 ### Support This Project
 <p align="left">
 <a href="https://www.paypal.me/adi1090x" target="_blank"><img alt="undefined" src="https://img.shields.io/badge/paypal-adi1090x-blue?style=for-the-badge&logo=paypal"></a>
