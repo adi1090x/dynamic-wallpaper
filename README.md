@@ -116,8 +116,8 @@ In terminal, *xfconf-query* will print lines starting with `set:`, which show wh
 ```
 
 3. **Autostart** : If you want to autostart the script with desktop, you can add it to your WM autostart file & if doesn't work for you, you can create a `desktop file` in `$HOME/.config/autostart` dir.
-```
-cd $HOME/.config/autostart && touch dwall.desktop
+```bash
+$ cd $HOME/.config/autostart && touch dwall.desktop
 
 # Add this to dwall.desktop file
 
