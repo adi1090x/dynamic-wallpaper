@@ -66,7 +66,7 @@ maldives  mall  mojave  moon  room  seoul  street  street2  surface  tokyostreet
 + User can add their own wallpapers.
 + 17[+](https://github.com/adi1090x/files/tree/master/dynamic-wallpaper/wallpapers) different types of wallpaper set (HD, UHD).
 + (Currently) Change according to time, throughout the day.
-+ Tested on - **WM:** *Openbox*, *i3wm*, *bspwm*, *awesomewm*, *Fluxbox*, *Fvwm*, *Swaywm* & **DE:** *KDE(neon)*, *Pantheon*, *Gnome(ubuntu, pop)*, *Deepin*, *Cinnamon*, *XFCE*, *LXDE*, *MATE*.
++ Tested on - **WM:** *Openbox*, *i3wm*, *bspwm*, *awesomewm*, *Fluxbox*, *Fvwm*, *Swaywm* & **DE:** *KDE(neon)*, *Pantheon*, *Gnome(ubuntu, pop_os)*, *Deepin*, *Cinnamon*, *XFCE*, *LXDE*, *MATE*.
 
 ### How to add own wallpapers
 
