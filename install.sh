@@ -30,6 +30,11 @@ esac
 echo
 echo -e $Y" [*] Installing... "$C
 echo
+# Install feh
+if ! [ -x "$(command -v feh)" ]; then
+	echo "Attemtping to install feh..."
+	sudo ./unipkg.sh feh
+fi
 # delete old dir if already exist
 if [[ -d $DES/dynamic-wallpaper ]]; then
     $SUDO rm -rf $DES/dynamic-wallpaper    

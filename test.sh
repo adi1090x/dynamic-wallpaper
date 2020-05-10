@@ -53,7 +53,10 @@ esac
 ## For XFCE
 if [[ "$OSTYPE" == "linux"* ]]; then
 	SCREEN="$(xrandr --listactivemonitors | awk -F ' ' 'END {print $1}' | tr -d \:)"
-    MONITOR="$(xrandr --listactivemonitors | awk -F ' ' 'END {print $2}' | tr -d \*+)"
+	MONITOR="$(xrandr --listactivemonitors | awk -F ' ' 'END {print $2}' | tr -d \*+)"
+	if [[ "$MONITOR" == "eDP1" ]]; then
+		MONITOR="0"
+	fi
 fi
 
 case "$OSTYPE" in
@@ -62,7 +65,7 @@ case "$OSTYPE" in
 				SETTER="eval ogurictl output '*' --image";
 			elif [[ "$DESKTOP_SESSION" =~ ^(MATE|Mate|mate)$ ]]; then 
 				SETTER="gsettings set org.mate.background picture-filename";
-			elif [[ "$DESKTOP_SESSION" =~ ^(Xfce Session|xfce session|XFCE|xfce|Xubuntu|xubuntu)$ ]]; then 
+			elif [[ "$DESKTOP_SESSION" == *(Xfce Session|xfce session|XFCE|xfce|Xubuntu|xubuntu)* ]]; then 
 				SETTER="xfconf-query --channel xfce4-desktop --property /backdrop/screen$SCREEN/monitor$MONITOR/workspace0/last-image --set";
 			elif [[ "$DESKTOP_SESSION" =~ ^(LXDE|Lxde|lxde)$ ]]; then 
 				SETTER="pcmanfm --set-wallpaper";
@@ -106,13 +109,24 @@ set_wallpaper() {
 		echo -e $R"Invalid theme/style, Try again."; reset_color; exit 1;
   fi
   if [ $FORMAT ]; then
+  		echo "$SETTER $image.$FORMAT"
 		$SETTER "$image.$FORMAT"
 		return;
   fi
 }
 
 main() {
-	num=$(($TIME/1))
+	if ! [ -f /tmp/dwallcount ]; then
+		echo "$(($TIME/1))" > /tmp/dwallcount
+	else
+		cat /tmp/dwallcount
+		num=`cat /tmp/dwallcount`
+		num=$(($num + 1))
+		if [ "$num" -gt 23 ]; then
+			num="0"
+		fi
+		echo "$num" > /tmp/dwallcount
+	fi
 	set_wallpaper "$num"
 }
 
@@ -123,10 +137,11 @@ usage() {
 	echo -e $G"Simple program to set a dynamic desktop background based on current time."
 	echo -e $Y"Developed By - Aditya Shakya (@adi1090x)"
 	echo
-	echo -e $B"usage: ./test.sh [-s] style [-o] style [-h]"
+	echo -e $B"usage: ./test.sh [-s] style [-o] style [-n] interval [-h]"
 	echo
 	echo -e $M"-s  style     name of theme/style."
 	echo -e $M"-o  style     Run once and exit, useful for schedulers (cron)."
+	echo -e $M"-n  interval  sets the testing interval, defaults to 5s."
 	echo -e $M"-h  help      show this usage/help message."
 	echo
  	echo -e $C"Styles Dir: $DIR/images"
@@ -143,7 +158,7 @@ init() {
 		exit 0;
     fi
     while true; do
-		main && echo "Running..." && sleep 5 && exec $DIR/test.sh -s $STYLE
+		main && echo "Running..." && sleep "$INTERVAL" && exec $DIR/test.sh -s $STYLE
     done
 }
 
@@ -161,7 +176,9 @@ reset_color() {
 
 is_valid_style "$1"
 
-while getopts ":s:o:h" opt; do
+INTERVAL="5"
+
+while getopts ":s:o:n:h" opt; do
   case ${opt} in
     s )
 		STYLE=$OPTARG
@@ -169,6 +186,9 @@ while getopts ":s:o:h" opt; do
     o )
 		RUN_ONCE=true
 		STYLE=$OPTARG
+		;;
+	n )
+		INTERVAL=$OPTARG
 		;;
     h )
 		usage
@@ -188,7 +208,8 @@ while getopts ":s:o:h" opt; do
   esac
 done
 
-if [ "$STYLE" ]; then
+re='^[0-9]+$'
+if [ "$STYLE" ] && [[ $INTERVAL =~ $re ]]; then
     init
 else
 	usage

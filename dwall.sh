@@ -53,7 +53,10 @@ esac
 ## For XFCE
 if [[ "$OSTYPE" == "linux"* ]]; then
 	SCREEN="$(xrandr --listactivemonitors | awk -F ' ' 'END {print $1}' | tr -d \:)"
-    MONITOR="$(xrandr --listactivemonitors | awk -F ' ' 'END {print $2}' | tr -d \*+)"
+	MONITOR="$(xrandr --listactivemonitors | awk -F ' ' 'END {print $2}' | tr -d \*+)"
+	if [[ "$MONITOR" == "eDP1" ]]; then
+		MONITOR="0"
+	fi
 fi
 
 case "$OSTYPE" in

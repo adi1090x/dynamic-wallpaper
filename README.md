@@ -48,10 +48,11 @@ Dynamic Wallpaper V1.0
 Simple program to set a dynamic desktop background based on current time.
 Developed By - Aditya Shakya (@adi1090x)
 
-usage: ./test.sh [-s] style [-o] style [-h]
+usage: ./test.sh [-s] style [-o] style [-n] interval [-h]
 
 -s  style     name of theme/style.
 -o  style     Run once and exit, useful for schedulers (cron).
+-n  interval  sets the testing interval, defaults to 5s.
 -h  help      show this usage/help message.
 
 Styles Dir: /home/aditya/adi1090x/dynamic-wallpaper/images
