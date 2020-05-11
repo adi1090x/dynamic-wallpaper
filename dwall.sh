@@ -122,34 +122,47 @@ reset_color() {
 	tput op # reset color
 }
 
-is_valid_style "$1"
+# parse all arguments and move all unmatched to the end
+TEMP=$(getopt -o 'ohs' --long 'run-once,help' -n 'dwall' -- "$@")
 
-while getopts ":s:o:h" opt; do
-  case ${opt} in
-    s )
-		STYLE=$OPTARG
-		;;
-    o )
-		RUN_ONCE=true
-		STYLE=$OPTARG
-		;;
-    h )
-		usage
+# if parsing fails
+if [ $? -ne 0 ]; then
+		echo -e $R"Unknown option,$G run dwall -h" >&2
 		reset_color
-		exit 0
-		;;
-    \?)
-		echo -e $R"Unknown option,$G run dwall -h"
-		reset_color
-		exit 1
-		;;
-    : )
-		echo -e $R"Invalid:$G -$OPTARG$R requires an argument."
-		reset_color
-		exit 1
-		;;
-  esac
+    exit 1
+fi
+
+# reset input arguments to be the reorderd arguments
+eval set -- "$TEMP"
+unset TEMP
+
+while true; do
+    echo $1
+    case $1 in
+        '-o'|'--run-once')
+            RUN_ONCE=true
+            shift
+            ;;
+        '-h'|'--help')
+            usage
+            reset_color
+            exit 0
+            ;;
+        '-s')
+            # warn but continue as normal.
+            echo -e $R"WARNING Option '-s' is depricated" >&2
+            reset_color
+            shift
+            ;;
+        '--')
+            shift
+            break
+            ;;
+    esac
 done
+
+# check that the only (unnamed) argument is a valid style
+is_valid_style "$1"
 
 case "$OSTYPE" in
 	linux*)
