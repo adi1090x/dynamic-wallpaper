@@ -107,6 +107,8 @@ set_wallpaper() {
   fi
   if [ $FORMAT ]; then
 		$SETTER "$image.$FORMAT"
+		mkdir -p "$HOME/.cache/dwall/" 
+		echo "$image.$FORMAT" > "$HOME/.cache/dwall/currentimage" 
 		return;
   fi
 }
@@ -130,6 +132,7 @@ usage() {
 	echo -e $M"-h  help      show this usage/help message."
 	echo
  	echo -e $C"Styles Dir: $DIR/images"
+ 	echo -e $C"Exports the path of the current image in ~/.cache/dwall/currentimage."
 	echo
 	printf $G"Available styles/themes:  "
 	printf -- $Y'%s  ' "${available_styles[@]}"
