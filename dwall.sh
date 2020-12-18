@@ -32,6 +32,11 @@ qdbus org.kde.plasmashell /PlasmaShell org.kde.PlasmaShell.evaluateScript "
     }"
 }
 
+# Set wallpaper for cinnamon
+set_cinnamon() {
+	 gsettings set org.cinnamon.desktop.background picture-uri  "file:///$1"
+}
+
 case "$OSTYPE" in
 	linux*)
 			DIR="/usr/share/dynamic-wallpaper"
@@ -70,6 +75,8 @@ case "$OSTYPE" in
 				SETTER=setkde;
 			elif [[ "$DESKTOP_SESSION" =~ ^(PANTHEON|Pantheon|pantheon|GNOME|Gnome|gnome|Gnome-xorg|gnome-xorg|UBUNTU|Ubuntu|ubuntu|DEEPIN|Deepin|deepin|POP|Pop|pop)$ ]]; then 
 				SETTER="gsettings set org.gnome.desktop.background picture-uri";
+			elif [[ "$DESKTOP_SESSION" =~ ^(cinnamon|Cinnamon)$ ]]; then 
+				SETTER=set_cinnamon;
 			else 
 				SETTER="feh --bg-scale"; 
 			fi
