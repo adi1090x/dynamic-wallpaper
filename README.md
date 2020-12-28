@@ -86,17 +86,17 @@ Developed By : Aditya Shakya (@adi1090x)
 Usage : test.sh [-h] [-p] [-s style]
 
 Options:
-   -h	   Show this help message
-   -p	   Use pywal to set wallpaper
-   -s	   Name of the style to apply
+   -h	  Show this help message
+   -p	  Use pywal to set wallpaper
+   -s	  Name of the style to apply
    
 Available styles:  aurora  beach  bitday  chihuahuan  cliffs  colony  desert  earth  exodus
 factory  firewatch  forest  gradient  home  island  lake  lakeside  market  mojave  moon
 mountains  room  sahara  street  tokyo  
 
 Examples: 
-test.sh -s beach	      Set wallpaper from 'beach' style
-test.sh -p -s sahara    Set wallpaper from 'sahara' style using pywal
+test.sh -s beach       Set wallpaper from 'beach' style
+test.sh -p -s sahara   Set wallpaper from 'sahara' style using pywal
 ```
 
 + Select the style you like and run -
