@@ -151,13 +151,13 @@ set_wallpaper() {
 	fi
 
 	# set wallpaper with pywal
-	if [[ -x `command -v wal` ]]; then
-		if [[ -n "$PYWAL" ]]; then
+	if [[ -n "$PYWAL" ]]; then
+		if [[ -x `command -v wal` ]]; then
 			wal -i "$image.$FORMAT"
+		else
+			echo -e ${RED}"[!] pywal is not installed on your system, exiting..."
+			{ reset_color; exit 1; }
 		fi
-	else
-		echo -e ${RED}"[!] pywal is not installed on your system, exiting..."
-		{ reset_color; exit 1; }
 	fi
 
 	# set wallpaper with setter
