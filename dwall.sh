@@ -135,9 +135,8 @@ case "$OSTYPE" in
 			;;
 esac
 
-## Wallpaper Setter
-set_wallpaper() {
-	cfile="$HOME/.cache/dwall_current"
+## Get Image
+get_img() {
 	image="$DIR/$STYLE/$1"
 
 	# get image format
@@ -149,16 +148,23 @@ set_wallpaper() {
 		echo -e ${RED}"[!] Invalid image file, Exiting..."
 		{ reset_color; exit 1; }
 	fi
+}
 
-	# set wallpaper with pywal
+## Set wallpaper with pywal
+pywal_set() {
+	get_img "$1"
 	if [[ -x `command -v wal` ]]; then
-		if [[ -n "$PYWAL" ]]; then
-			wal -i "$image.$FORMAT"
-		fi
+		wal -i "$image.$FORMAT"
 	else
 		echo -e ${RED}"[!] pywal is not installed on your system, exiting..."
 		{ reset_color; exit 1; }
 	fi
+}
+
+## Wallpaper Setter
+set_wallpaper() {
+	cfile="$HOME/.cache/dwall_current"
+	get_img "$1"
 
 	# set wallpaper with setter
 	if [[ -n "$FORMAT" ]]; then
@@ -198,7 +204,11 @@ main() {
 	# get current hour
 	num=$(($HOUR/1))
 	# set wallpaper accordingly
-	{ set_wallpaper "$num"; reset_color; exit 0; }
+	if [[ -n "$PYWAL" ]]; then
+		{ pywal_set "$num"; reset_color; exit 0; }
+	else
+		{ set_wallpaper "$num"; reset_color; exit 0; }
+	fi
 }
 
 ## Get Options
