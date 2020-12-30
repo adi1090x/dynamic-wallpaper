@@ -125,11 +125,11 @@ $ systemctl status cronie.service
    Main PID: 779 (crond)
 ```
 
-- Cron does not run under the Xorg server therefore it cannot know the environmental variable necessary to be able to start an Xorg server application so they will have to be defined. Find out the values of following environment variables - `SHELL, DISPLAY, DESKTOP_SESSION, DBUS_SESSION_BUS_ADDRESS, XDG_RUNTIME_DIR`
+- Cron does not run under the Xorg server therefore it cannot know the environmental variable necessary to be able to start an Xorg server application so they will have to be defined. Find out the values of following environment variables - `SHELL, PATH, DISPLAY, DESKTOP_SESSION, DBUS_SESSION_BUS_ADDRESS, XDG_RUNTIME_DIR`
 ```
-$ echo "$SHELL | $DISPLAY | $DESKTOP_SESSION | $DBUS_SESSION_BUS_ADDRESS | $XDG_RUNTIME_DIR"
+$ echo "$SHELL | $PATH | $DISPLAY | $DESKTOP_SESSION | $DBUS_SESSION_BUS_ADDRESS | $XDG_RUNTIME_DIR"
 
-/usr/bin/zsh | :0 | Openbox | unix:path=/run/user/1000/bus | /run/user/1000
+/usr/bin/zsh | /usr/local/bin:/usr/bin | :0 | Openbox | unix:path=/run/user/1000/bus | /run/user/1000
 ```
 
 - Now, Create an hourly cron job for **dwall** using `crontab` -
@@ -141,11 +141,11 @@ $ export EDITOR=vim
 $ crontab -e
 
 # Add this line replacing the values of env variable and style with yours
-0 * * * * env DISPLAY=:0 DESKTOP_SESSION=Openbox DBUS_SESSION_BUS_ADDRESS="unix:path=/run/user/1000/bus" /usr/bin/dwall -s firewatch
+0 * * * * env PATH=/usr/local/bin:/usr/bin DISPLAY=:0 DESKTOP_SESSION=Openbox DBUS_SESSION_BUS_ADDRESS="unix:path=/run/user/1000/bus" /usr/bin/dwall -s firewatch
 
 # check if job is created on your crontab
 $ crontab -l
-0 * * * * env DISPLAY=:0 DESKTOP_SESSION=Openbox DBUS_SESSION_BUS_ADDRESS="unix:path=/run/user/1000/bus" /usr/bin/dwall -s firewatch
+0 * * * * env PATH=/usr/local/bin:/usr/bin DISPLAY=:0 DESKTOP_SESSION=Openbox DBUS_SESSION_BUS_ADDRESS="unix:path=/run/user/1000/bus" /usr/bin/dwall -s firewatch
 ```
 
 - That's it, **dwall** added to your crontab and will change the wallpaper every hour. If you want to change the wallpaper style, just remove previous job and add new with another style.
@@ -155,7 +155,7 @@ $ crontab -r
 
 # Add new job with different style
 $ crontab -e
-0 * * * * env DISPLAY=:0 DESKTOP_SESSION=Openbox DBUS_SESSION_BUS_ADDRESS="unix:path=/run/user/1000/bus" /usr/bin/dwall -s bitday
+0 * * * * env PATH=/usr/local/bin:/usr/bin DISPLAY=:0 DESKTOP_SESSION=Openbox DBUS_SESSION_BUS_ADDRESS="unix:path=/run/user/1000/bus" /usr/bin/dwall -s bitday
 ```
 
 ### How to add own wallpapers
