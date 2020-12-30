@@ -158,6 +158,26 @@ $ crontab -e
 0 * * * * env DISPLAY=:0 DESKTOP_SESSION=Openbox DBUS_SESSION_BUS_ADDRESS="unix:path=/run/user/1000/bus" /usr/bin/dwall -s bitday
 ```
 
+#### How update wallpapers on log-in
+The cronjob is only executed at every full hour while your system is powered. This means that if you don't use your pc for i.e. 8 h the wallpapers will be out of sync with the time of the day until the next full hour.
+
+To update the wallpaper on log-in add a short script to your window managers (WM) autostart applications:
+
+##### Gnome
+Create a file called `dwall.desktop` in `~/.config/autostart`:
+```
+[Desktop Entry]
+Name=Dwall
+GenericName=Dynamic Wallpapers
+Comment=Updates the background image on log-in
+Exec=dwall -s lakeside // <-- Add your prefered style here
+Terminal=false
+Type=Application
+X-GNOME-Autostart-enabled=true
+
+```
+Restart your pc or log-off and back in to your current user.
+
 ### How to add own wallpapers
 
 + Download a wallpaper set you like.
