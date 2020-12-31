@@ -49,6 +49,9 @@ $ sudo pacman -Sy xorg-xrandr feh cronie
 
 # On Ubuntu or Debian
 $ sudo apt-get install x11-xserver-utils feh cron
+
+# Installing pywal (optional)
+$ sudo python -m pip install pywal
 ```
 
 > For swaywm support users must install [oguri](https://github.com/vilhalmer/oguri). The `oguri` daemon must be started for the script to work. `Oguri` can be installed on Arch linux via [AUR](https://aur.archlinux.org/packages/oguri-git/).
