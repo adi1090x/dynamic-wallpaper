@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-16"?>
+<Task version="1.2" xmlns="http://schemas.microsoft.com/windows/2004/02/mit/task">
+  <RegistrationInfo>
+    <Version>0.1.0</Version>
+    <Description>Changes desktop background hourly. Runs dwall.bat windowless, see Invisible.vbs section of https://ss64.com/vb/run.html and https://superuser.com/a/62646.</Description>
+    <URI>\dynamic-wallpaper</URI>
+  </RegistrationInfo>
+  <Triggers>
+    <TimeTrigger>
+      <Repetition>
+        <Interval>PT1H</Interval>
+        <StopAtDurationEnd>false</StopAtDurationEnd>
+      </Repetition>
+      <StartBoundary>2021-01-02T17:00:00</StartBoundary>
+      <Enabled>true</Enabled>
+    </TimeTrigger>
+    <LogonTrigger>
+      <Enabled>true</Enabled>
+    </LogonTrigger>
+  </Triggers>
+  <Actions Context="Author">
+    <Exec>
+      <Command>wscript.exe</Command>
+      <Arguments>"{0}" "{1}"</Arguments>
+    </Exec>
+  </Actions>
+</Task>
