@@ -64,7 +64,7 @@ usage() {
 		Dwall V2.0   : Set wallpapers according to current time.
 		Developed By : Aditya Shakya (@adi1090x)
 			
-		Usage : `basename $0` [-h] [-p] [-s style]
+		Usage : `basename $0` [-h] [-p] [-o output] [-s style]
 
 		Options:
 		   -h	Show this help message
@@ -81,8 +81,9 @@ usage() {
 
     cat <<- EOF
 		Examples: 
-		`basename $0` -s beach        Set wallpaper from 'beach' style
-		`basename $0` -p -s sahara    Set wallpaper from 'sahara' style using pywal
+		`basename $0` -s beach        			Set wallpaper from 'beach' style
+		`basename $0` -p -s sahara    			Set wallpaper from 'sahara' style using pywal
+		`basename $0` -o ~/wallpaper -s sahara	Copy current sahara wallpaper to ~/wallpaper, you have to change the wallpaper with a separate script
 		
 	EOF
 }
