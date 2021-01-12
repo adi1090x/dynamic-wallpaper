@@ -69,6 +69,7 @@ usage() {
 		Options:
 		   -h	Show this help message
 		   -p	Use pywal to set wallpaper
+		   -o	Copy wallpaper to this file
 		   -s	Name of the style to apply
 		   
 	EOF
@@ -161,6 +162,12 @@ pywal_set() {
 	fi
 }
 
+## Put wallpaper in $OUTPUT
+file_set() {
+	get_img "$1"
+	cp "$image.$FORMAT" "$OUTPUT"
+}
+
 ## Wallpaper Setter
 set_wallpaper() {
 	cfile="$HOME/.cache/dwall_current"
@@ -206,16 +213,21 @@ main() {
 	# set wallpaper accordingly
 	if [[ -n "$PYWAL" ]]; then
 		{ pywal_set "$num"; reset_color; exit 0; }
+	elif [[ -n "$OUTPUT" ]]; then
+		{ file_set "$num"; reset_color; exit 0; }
 	else
 		{ set_wallpaper "$num"; reset_color; exit 0; }
 	fi
 }
 
 ## Get Options
-while getopts ":s:hp" opt; do
+while getopts ":s:o:hp" opt; do
 	case ${opt} in
 		p)
 			PYWAL=true
+			;;
+		o)
+			OUTPUT=$OPTARG
 			;;
 		s)
 			STYLE=$OPTARG
