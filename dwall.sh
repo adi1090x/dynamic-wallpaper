@@ -165,7 +165,18 @@ pywal_set() {
 ## Put wallpaper in $OUTPUT
 file_set() {
 	get_img "$1"
-	cp "$image.$FORMAT" "$OUTPUT"
+	if [[ -n $(echo "$OUTPUT" | grep -o "^[/~]") ]]
+	then
+		DIR=$(dirname $OUTPUT)
+		if [[ -d $DIR ]]
+		then
+			cp "$image.$FORMAT" "$OUTPUT"
+		else
+			echo "[!] Directory $DIR does not exist, exiting..."
+		fi
+	else
+		echo "[!] Output must be an absolute path, $OUTPUT isn't, exiting..."
+	fi
 }
 
 ## Wallpaper Setter
