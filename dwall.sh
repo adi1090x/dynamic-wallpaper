@@ -44,7 +44,7 @@ trap exit_on_signal_SIGTERM SIGTERM
 
 ## Prerequisite
 Prerequisite() { 
-    dependencies=(feh xrandr crontab)
+    dependencies=(feh xrandr crontab tail cut xargs)
     for dependency in "${dependencies[@]}"; do
         type -p "$dependency" &>/dev/null || {
             echo -e ${RED}"[!] ERROR: Could not find ${GREEN}'${dependency}'${RED}, is it installed?" >&2
@@ -67,9 +67,10 @@ usage() {
 		Usage : `basename $0` [-h] [-p] [-s style]
 
 		Options:
-		   -h	Show this help message
-		   -p	Use pywal to set wallpaper
-		   -s	Name of the style to apply
+			-h		Show this help message
+			-p		Use pywal to set wallpaper
+			 -b		Pass a backend to pywal (optional)
+			-s		Name of the style to apply
 		   
 	EOF
 
@@ -80,8 +81,9 @@ usage() {
 
     cat <<- EOF
 		Examples: 
-		`basename $0` -s beach        Set wallpaper from 'beach' style
-		`basename $0` -p -s sahara    Set wallpaper from 'sahara' style using pywal
+		`basename $0` -s beach                Set wallpaper from 'beach' style
+		`basename $0` -p -s sahara            Set wallpaper from 'sahara' style using pywal
+		`basename $0` -p -b colorz -s sahara  Set wallpaper from 'sahara' style using pywal with 'colorz' backend
 		
 	EOF
 }
@@ -150,11 +152,21 @@ get_img() {
 	fi
 }
 
+## Check valid pywal backend
+pywal_backend() {
+	backends=$(wal --backend | tail -n +2 | cut -d ' ' -f 3 | xargs)
+	[[ "$backends" =~ (^| )"$1"($| ) ]] && return 0 || return 1
+}
+
 ## Set wallpaper with pywal
 pywal_set() {
 	get_img "$1"
+	if ! pywal_backend "$2"; then
+		echo -e ${RED}"[!] $2 is not a valid pywal backend. Check valid backends with `wal --backend`. Exiting..."
+		{ reset_color; exit 1; }
+	fi
 	if [[ -x `command -v wal` ]]; then
-		wal -i "$image.$FORMAT"
+		wal --backend "$2" -i "$image.$FORMAT"
 	else
 		echo -e ${RED}"[!] pywal is not installed on your system, exiting..."
 		{ reset_color; exit 1; }
@@ -205,17 +217,21 @@ main() {
 	num=$(($HOUR/1))
 	# set wallpaper accordingly
 	if [[ -n "$PYWAL" ]]; then
-		{ pywal_set "$num"; reset_color; exit 0; }
+		_walbackend=${WALBACKEND:-wal}
+		{ pywal_set "$num" "$_walbackend"; reset_color; exit 0; }
 	else
 		{ set_wallpaper "$num"; reset_color; exit 0; }
 	fi
 }
 
 ## Get Options
-while getopts ":s:hp" opt; do
+while getopts ":s:hpb:" opt; do
 	case ${opt} in
 		p)
 			PYWAL=true
+			;;
+		b)
+			WALBACKEND=$OPTARG
 			;;
 		s)
 			STYLE=$OPTARG
