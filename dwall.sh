@@ -15,7 +15,8 @@ REDBG="$(printf '\033[41m')"  GREENBG="$(printf '\033[42m')"  ORANGEBG="$(printf
 MAGENTABG="$(printf '\033[45m')"  CYANBG="$(printf '\033[46m')"  WHITEBG="$(printf '\033[47m')" BLACKBG="$(printf '\033[40m')"
 
 ## Wallpaper directory
-DIR="/usr/share/dynamic-wallpaper/images"
+DIR="/usr/share/dynamic-wallpaper"
+DIRIMG="$DIR/images"
 HOUR=`date +%k`
 
 ## Wordsplit in ZSH
@@ -64,16 +65,20 @@ usage() {
 		Dwall V2.0   : Set wallpapers according to current time.
 		Developed By : Aditya Shakya (@adi1090x)
 			
-		Usage : `basename $0` [-h] [-p] [-s style]
+		Usage : `basename $0` [-h] [-p] [-r] [-d] [-s style]
 
 		Options:
 		   -h	Show this help message
 		   -p	Use pywal to set wallpaper
 		   -s	Name of the style to apply
+		   -d 	Change style every day
+		   -r 	Get a random wallpaper style
+
+		NOTE: [-r] and [-d] can't be used together. If [-r] and [-d] are provided the [-s style] is ignored.
 		   
 	EOF
 
-	styles=(`ls $DIR`)
+	styles=(`ls $DIRIMG`)
 	printf ${GREEN}"Available styles:  "
 	printf -- ${ORANGE}'%s  ' "${styles[@]}"
 	printf -- '\n\n'${WHITE}
@@ -82,6 +87,8 @@ usage() {
 		Examples: 
 		`basename $0` -s beach        Set wallpaper from 'beach' style
 		`basename $0` -p -s sahara    Set wallpaper from 'sahara' style using pywal
+		`basename $0` -r              Set a random wallpaper style
+		`basename $0` -d              Set a random wallpaper style every day(Better use with cron jobs)
 		
 	EOF
 }
@@ -137,7 +144,49 @@ esac
 
 ## Get Image
 get_img() {
-	image="$DIR/$STYLE/$1"
+
+	FILEPATH="$DIR/intermediate.txt"
+	OLDDATE=`cat "$FILEPATH" | awk '{print $1}'`
+	CURRDATE="$(echo `date` | awk '{print $2}')"
+
+	# GET A RANDOW WALLPAPER NAME
+	WALLPAPER="$(find "$DIRIMG" -maxdepth 1 -type d -printf '%f\n' | shuf -n 1 )"
+
+	# IF THE NAME OF WALLPAPER = "images" THEN GET ANOTHER RANDOM WALLPAPER
+	if [ $WALLPAPER == "images" ]
+	then
+		WALLPAPER="$(find "$DIRIMG" -maxdepth 1 -type d -printf '%f\n' | shuf -n 1 )"
+	fi
+
+	if [ $RANDOMDAY ]
+	then
+		if [ $RANDOM ]
+		then
+			# ERROR RANDOMDAY AND RANDOM CAN'T BE SET TO TRUE SIMULTANEOUSLY
+			echo -e ${RED}"[!] Invalid option combination : ${GREEN}-r -d simultaneosly can't be used${RED}, exiting..."
+			{ reset_color; exit 1; }
+		else
+			if [ $CURRDATE != $OLDDATE ]
+			then
+				image="$DIRIMG/$WALLPAPER/$1"
+				# UPDATE THE INTERMEDIATE.TXT FILE
+				echo "${CURRDATE} ${WALLPAPER}" > "$FILEPATH"
+			else
+				WALLPAPER=`cat "$FILEPATH" | awk '{print $2}'`
+				image="$DIRIMG/$WALLPAPER/$1"
+			fi
+		fi
+	else
+		if [ $RANDOM ]
+		then
+			image="$DIRIMG/$WALLPAPER/$1"
+			# UPDATE THE INTERMEDIATE.TXT FILE
+			echo "${CURRDATE} ${WALLPAPER}" > "$FILEPATH"
+		else
+			image="$DIRIMG/$STYLE/$1"
+			echo "${CURRDATE} ${STYLE}" > "$FILEPATH"
+		fi
+	fi
 
 	# get image format
 	if [[ -f "${image}.png" ]]; then
@@ -182,7 +231,7 @@ set_wallpaper() {
 
 ## Check valid style
 check_style() {
-	styles=(`ls $DIR`)
+	styles=(`ls $DIRIMG`)
 	for i in "${styles[@]}"; do
 		if [[ "$i" == "$1" ]]; then
 			echo -e ${BLUE}"[*] Using style : ${MAGENTA}$1"
@@ -211,11 +260,20 @@ main() {
 	fi
 }
 
+
+unset RANDOM
+unset RANDOMDAY
 ## Get Options
-while getopts ":s:hp" opt; do
+while getopts ":s:hprd" opt; do
 	case ${opt} in
 		p)
 			PYWAL=true
+			;;
+		r)
+			RANDOM=true
+			;;
+		d)
+			RANDOMDAY=true
 			;;
 		s)
 			STYLE=$OPTARG
@@ -236,9 +294,14 @@ done
 
 ## Run
 Prerequisite
-if [[ "$STYLE" ]]; then
-	check_style "$STYLE"
+if [[ "$RANDOM" ]]; then
     main
+elif [ "$RANDOMDAY" = true ]
+then 
+	main
+elif [[ "$STYLE" ]]; then
+	check_style "$STYLE"
+	main
 else
 	{ usage; reset_color; exit 1; }
 fi

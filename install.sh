@@ -30,9 +30,10 @@ mkdir_dw() {
 ## Copy files
 copy_files() {
 	# copy images and scripts
-	sudo cp -r "$DIR"/images "$DES"/dynamic-wallpaper && sudo cp -r "$DIR"/dwall.sh "$DES"/dynamic-wallpaper
+	sudo cp -r "$DIR"/images "$DES"/dynamic-wallpaper && sudo cp -r "$DIR"/dwall.sh "$DES"/dynamic-wallpaper && sudo cp -r "$DIR"/intermediate.txt "$DES"/dynamic-wallpaper 
 	# make script executable
 	sudo chmod +x "$DES"/dynamic-wallpaper/dwall.sh
+	sudo chmod 666 "$DES"/dynamic-wallpaper/intermediate.txt
 	# create link in bin directory
 	if [[ -L /usr/bin/dwall ]]; then
 		sudo rm /usr/bin/dwall
