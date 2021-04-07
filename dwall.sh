@@ -166,7 +166,7 @@ pywal_set() {
 		{ reset_color; exit 1; }
 	fi
 	if [[ -x `command -v wal` ]]; then
-		wal --backend "$2" -i "$image.$FORMAT"
+		wal --backend "$2" -i "$image.$FORMAT" $((( $HOUR > 6 && $HOUR < 12 )) && printf '-l')
 	else
 		echo -e ${RED}"[!] pywal is not installed on your system, exiting..."
 		{ reset_color; exit 1; }
