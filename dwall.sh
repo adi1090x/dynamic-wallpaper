@@ -110,6 +110,11 @@ set_cinnamon() {
 	 gsettings set org.cinnamon.desktop.background picture-uri "file:///$1"
 }
 
+## Set wallpaper in GNOME
+set_gnome() {
+	gsettings set org.gnome.desktop.background picture-uri "file:///$1"
+	gsettings set org.gnome.desktop.screensaver picture-uri "file:///$1"
+}
 ## For XFCE only
 if [[ "$OSTYPE" == "linux"* ]]; then
 	SCREEN="$(xrandr --listactivemonitors | awk -F ' ' 'END {print $1}' | tr -d \:)"
@@ -132,7 +137,7 @@ case "$OSTYPE" in
 			elif [[ "$DESKTOP_SESSION" =~ ^(/usr/share/xsessions/plasma|NEON|Neon|neon|PLASMA|Plasma|plasma|KDE|Kde|kde)$ ]]; then
 				SETTER=set_kde
 			elif [[ "$DESKTOP_SESSION" =~ ^(PANTHEON|Pantheon|pantheon|GNOME|Gnome|gnome|Gnome-xorg|gnome-xorg|UBUNTU|Ubuntu|ubuntu|DEEPIN|Deepin|deepin|POP|Pop|pop)$ ]]; then
-				SETTER="gsettings set org.gnome.desktop.background picture-uri"
+				SETTER=set_gnome
 			else 
 				SETTER="feh --bg-fill"
 			fi
@@ -178,11 +183,12 @@ pywal_set() {
 		{ reset_color; exit 1; }
 	fi
 	if [[ -x `command -v wal` ]]; then
-		local walcmd=(wal --backend "$2" -i "$image.$FORMAT")
+		local walcmd=(wal --backend "$2" -i "$image.$FORMAT" -n)
 		if pywal_light; then
 			walcmd+=(-l)
 		fi
 		"${walcmd[@]}"
+		set_wallpaper "$1"
 	else
 		echo -e ${RED}"[!] pywal is not installed on your system, exiting..."
 		{ reset_color; exit 1; }
