@@ -70,6 +70,8 @@ usage() {
 			-h		Show this help message
 			-p		Use pywal to set wallpaper
 			 -b		Pass a backend to pywal (optional)
+			 -l		Force light color scheme
+			 -a		Automatically set light/dark color scheme based on GNOME theme or daytime
 			-s		Name of the style to apply
 		   
 	EOF
@@ -158,6 +160,16 @@ pywal_backend() {
 	[[ "$backends" =~ (^| )"$1"($| ) ]] && return 0 || return 1
 }
 
+## Determine light/dark scheme based on GNOME night light or daytime
+pywal_light() {
+	[[ $WALSCHEME == 'light' ]] && return 0
+	if [[ $WALSCHEME == 'auto' ]]; then
+		[[ $DESKTOP_SESSION =~ ^(GNOME|Gnome|gnome|Gnome-xorg|gnome-xorg)$ && $(gsettings get org.gnome.desktop.interface gtk-theme) != *"dark"* ]] && return 0
+		(( $HOUR > 6 && $HOUR < 18 )) && return 0
+	fi
+	return 1
+}
+
 ## Set wallpaper with pywal
 pywal_set() {
 	get_img "$1"
@@ -166,7 +178,11 @@ pywal_set() {
 		{ reset_color; exit 1; }
 	fi
 	if [[ -x `command -v wal` ]]; then
-		wal --backend "$2" -i "$image.$FORMAT" $((( $HOUR > 6 && $HOUR < 12 )) && printf '-l')
+		local walcmd=(wal --backend "$2" -i "$image.$FORMAT")
+		if pywal_light; then
+			walcmd+=(-l)
+		fi
+		"${walcmd[@]}"
 	else
 		echo -e ${RED}"[!] pywal is not installed on your system, exiting..."
 		{ reset_color; exit 1; }
@@ -224,8 +240,9 @@ main() {
 	fi
 }
 
+WALSCHEME='dark'
 ## Get Options
-while getopts ":s:hpb:" opt; do
+while getopts ":s:plahb:" opt; do
 	case ${opt} in
 		p)
 			PYWAL=true
@@ -235,6 +252,12 @@ while getopts ":s:hpb:" opt; do
 			;;
 		s)
 			STYLE=$OPTARG
+			;;
+		l)
+			WALSCHEME='light'
+			;;
+		a)
+			WALSCHEME='auto'
 			;;
 		h)
 			{ usage; reset_color; exit 0; }
