@@ -60,21 +60,20 @@ usage() {
 		${RED}╺┳┓╻ ╻┏┓╻┏━┓┏┳┓╻┏━╸   ${GREEN}╻ ╻┏━┓╻  ╻  ┏━┓┏━┓┏━┓┏━╸┏━┓
 		${RED} ┃┃┗┳┛┃┗┫┣━┫┃┃┃┃┃     ${GREEN}┃╻┃┣━┫┃  ┃  ┣━┛┣━┫┣━┛┣╸ ┣┳┛
 		${RED}╺┻┛ ╹ ╹ ╹╹ ╹╹ ╹╹┗━╸   ${GREEN}┗┻┛╹ ╹┗━╸┗━╸╹  ╹ ╹╹  ┗━╸╹┗╸
-		${CYAN}I M P R O V E D${WHITE}
+		${CYAN}[ I M P R O V E D ]${WHITE}
 		
-		DWI          : Set wallpapers according to current time.
-		Developed By : Aditya Shakya (@adi1090x) and GitGangGuy
-			
-		Usage : `basename $0` [-h] [-p [ -b backend ] [ -a | -l ] ] [-s style]
+		A bash script to adapt your wallpaper to the time
+		By Aditya Shakya (@adi1090x) and GitGangGuy
+		
+		Usage                            `basename $0` [ -h ] [ -p [ -b backend ] [ -a | -l ] ] [ -s style ]
 
 		Options:
-			-h		Show this help message
-			-p		Use pywal to set wallpaper
-			 -b		Pass a backend to pywal (optional)
-			 -l		Force light color scheme
-			 -a		Automatically set light/dark color scheme based on GNOME theme or daytime
-			-s		Name of the style to apply
-		   
+		  -h                             Show this help message
+		  -p                             Use pywal to set wallpaper
+		    -b                           Pass a backend to pywal (optional)
+		    -l                           Force light color scheme
+		    -a                           Automatically set light/dark color scheme based on GNOME theme or daytime
+		  -s                             Name of the style to apply
 	EOF
 
 	styles=(`ls $DIR`)
@@ -83,11 +82,12 @@ usage() {
 	printf -- '\n\n'${WHITE}
 
     cat <<- EOF
-		Examples: 
-		`basename $0` -s beach                Set wallpaper from 'beach' style
-		`basename $0` -p -s sahara            Set wallpaper from 'sahara' style using pywal
-		`basename $0` -p -b colorz -s sahara  Set wallpaper from 'sahara' style using pywal with 'colorz' backend
-		
+		Examples:
+		`basename $0` -s beach                   Set wallpaper from 'beach' style
+		`basename $0` -p -s sahara               Set wallpaper from 'sahara' style using pywal
+		`basename $0` -p -b colorz -s sahara     " with 'colorz' backend
+		`basename $0` -p -b colorz -s sahara -a    " with automatic light/dark mode
+		`basename $0` -p -b colorz -s sahara -l    " with forced light mode
 	EOF
 }
 
