@@ -1,9 +1,9 @@
 #!/usr/bin/env bash
 
-## Author  : Aditya Shakya (adi1090x)
-## Mail    : adi1090x@gmail.com
-## Github  : @adi1090x
-## Twitter : @adi1090x
+## Author  : Aditya Shakya (adi1090x), GitGangGuy
+## Mail    : adi1090x@gmail.com, -
+## Github  : @adi1090x, @GitGangGuy
+## Twitter : @adi1090x, -
 
 ## Dynamic Wallpaper : Set wallpapers according to current time.
 ## Created to work better with job schedulers (cron)
@@ -44,7 +44,7 @@ trap exit_on_signal_SIGTERM SIGTERM
 
 ## Prerequisite
 Prerequisite() { 
-    dependencies=(feh xrandr crontab tail cut xargs)
+    dependencies=(feh xrandr crontab xargs)
     for dependency in "${dependencies[@]}"; do
         type -p "$dependency" &>/dev/null || {
             echo -e ${RED}"[!] ERROR: Could not find ${GREEN}'${dependency}'${RED}, is it installed?" >&2
@@ -59,12 +59,13 @@ usage() {
     cat <<- EOF
 		${RED}╺┳┓╻ ╻┏┓╻┏━┓┏┳┓╻┏━╸   ${GREEN}╻ ╻┏━┓╻  ╻  ┏━┓┏━┓┏━┓┏━╸┏━┓
 		${RED} ┃┃┗┳┛┃┗┫┣━┫┃┃┃┃┃     ${GREEN}┃╻┃┣━┫┃  ┃  ┣━┛┣━┫┣━┛┣╸ ┣┳┛
-		${RED}╺┻┛ ╹ ╹ ╹╹ ╹╹ ╹╹┗━╸   ${GREEN}┗┻┛╹ ╹┗━╸┗━╸╹  ╹ ╹╹  ┗━╸╹┗╸${WHITE}
+		${RED}╺┻┛ ╹ ╹ ╹╹ ╹╹ ╹╹┗━╸   ${GREEN}┗┻┛╹ ╹┗━╸┗━╸╹  ╹ ╹╹  ┗━╸╹┗╸
+		${CYAN}I M P R O V E D${WHITE}
 		
-		Dwall V2.0   : Set wallpapers according to current time.
-		Developed By : Aditya Shakya (@adi1090x)
+		DWI          : Set wallpapers according to current time.
+		Developed By : Aditya Shakya (@adi1090x) and GitGangGuy
 			
-		Usage : `basename $0` [-h] [-p] [-s style]
+		Usage : `basename $0` [-h] [-p [ -b backend ] [ -a | -l ] ] [-s style]
 
 		Options:
 			-h		Show this help message
