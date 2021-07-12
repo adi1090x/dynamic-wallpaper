@@ -12,13 +12,6 @@
   <img src="https://img.shields.io/github/forks/adi1090x/dynamic-wallpaper?color=teal&style=for-the-badge">
 </p>
 
-<p align="center">
-  <a href="https://www.buymeacoffee.com/adi1090x" target="_blank"><img alt="undefined" width="48px" src="https://raw.githubusercontent.com/adi1090x/files/master/other/1.png"></a>
-  <a href="https://ko-fi.com/adi1090x" target="_blank"><img alt="undefined" width="48px" src="https://raw.githubusercontent.com/adi1090x/files/master/other/2.png"></a>
-  <a href="https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=U3VK2SSVQWAPN" target="_blank"><img alt="undefined" width="48px" src="https://raw.githubusercontent.com/adi1090x/files/master/other/3.png"></a>
-  <a href="https://www.patreon.com/adi1090x" target="_blank"><img alt="undefined" width="48px" src="https://raw.githubusercontent.com/adi1090x/files/master/other/4.png"></a>
-</p>
-
 <p align="center">A simple <code>bash</code> script to set wallpapers according to current time, using <b>cron job scheduler</b>.</p>
 
 ![gif](https://raw.githubusercontent.com/adi1090x/files/master/dynamic-wallpaper/main.gif) <br />
