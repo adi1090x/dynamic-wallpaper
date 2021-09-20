@@ -73,7 +73,7 @@ usage() {
 		   
 	EOF
 
-	styles=(`ls $DIR`)
+	styles=(`ls "$DIR"`)
 	printf ${GREEN}"Available styles:  "
 	printf -- ${ORANGE}'%s  ' "${styles[@]}"
 	printf -- '\n\n'${WHITE}
@@ -182,7 +182,7 @@ set_wallpaper() {
 
 ## Check valid style
 check_style() {
-	styles=(`ls $DIR`)
+	styles=(`ls "$DIR"`)
 	for i in "${styles[@]}"; do
 		if [[ "$i" == "$1" ]]; then
 			echo -e ${BLUE}"[*] Using style : ${MAGENTA}$1"
