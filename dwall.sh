@@ -103,7 +103,7 @@ set_kde() {
 
 ## Set wallpaper in cinnamon
 set_cinnamon() {
-	 gsettings set org.cinnamon.desktop.background picture-uri "file:///$1"
+	 dconf write /org/cinnamon/desktop/background/picture-uri  "'file:///$1'"
 }
 
 ## For XFCE only
