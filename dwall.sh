@@ -103,7 +103,7 @@ set_kde() {
 
 ## Set wallpaper in cinnamon
 set_cinnamon() {
-	 dconf write /org/cinnamon/desktop/background/picture-uri  "'file:///$1'"
+	 PATH=/usr/local/bin:/usr/bin DISPLAY="$DISPLAY" DESKTOP_SESSION="$DESKTOP_SESSION" DBUS_SESSION_BUS_ADDRESS="$DBUS_SESSION_BUS_ADDRESS" dconf write /org/cinnamon/desktop/background/picture-uri  "'file:///$1'"dconf write /org/cinnamon/desktop/background/picture-uri  "'file:///$1'"
 }
 
 ## For XFCE only
