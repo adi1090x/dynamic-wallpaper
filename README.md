@@ -42,6 +42,9 @@ $ sudo pacman -Sy xorg-xrandr feh cronie
 
 # On Ubuntu or Debian
 $ sudo apt-get install x11-xserver-utils feh cron
+
+# On Fedora Workstation
+$ sudo dnf install xrandr feh cronie
 ```
 
 > For swaywm support users must install [oguri](https://github.com/vilhalmer/oguri). The `oguri` daemon must be started for the script to work. `Oguri` can be installed on Arch linux via [AUR](https://aur.archlinux.org/packages/oguri-git/).
@@ -107,6 +110,9 @@ This program is specifically created to use with a time-based job scheduler such
 ```bash
 # On Arch Linux
 $ sudo systemctl enable cronie.service --now
+
+# On Fedora Workstation
+$ systemctl enable crond.service
 ```
 
 - Make sure the service is enabled and running -
@@ -116,6 +122,13 @@ $ systemctl status cronie.service
      Loaded: loaded (/usr/lib/systemd/system/cronie.service; enabled; vendor preset: disabled)
      Active: active (running) since Sat 2020-12-26 14:39:31 IST; 5h 22min ago
    Main PID: 779 (crond)
+   
+# On Fedora Workstation
+$ systemctl status crond.service
+● crond.service - Command Scheduler
+     Loaded: loaded (/usr/lib/systemd/system/crond.service; enabled; vendor preset: enabled)
+     Active: active (running) since Tue 2021-12-14 01:56:40 WIB; 11min ago
+   Main PID: 68920 (crond)
 ```
 
 - Cron does not run under the Xorg server therefore it cannot know the environmental variable necessary to be able to start an Xorg server application so they will have to be defined. Find out the values of following environment variables - `SHELL, PATH, DISPLAY, DESKTOP_SESSION, DBUS_SESSION_BUS_ADDRESS, XDG_RUNTIME_DIR`
@@ -174,6 +187,8 @@ $ sudo pacman -Sy libheif
 # On Ubuntu or Debian
 $ sudo apt-get install libheif-examples
 
+# On Fedora Workstation
+$ sudo dnf install libheif
 ```
 
 - Move you `.heic` file in a directory and run following command to convert images - 
