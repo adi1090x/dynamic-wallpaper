@@ -14,7 +14,7 @@ DES="/usr/share"
 
 ## Delete files
 rmdir_dw() {
-	echo -e ${ORANGE}"[*] Uninstalling Dynamic Wallpaper..."${WHITE}
+	echo -e "${ORANGE}""[*] Uninstalling Dynamic Wallpaper...""${WHITE}"
 	if [[ -d "$DES"/dynamic-wallpaper ]]; then
 		# delete dwall directory
 		sudo rm -rf "$DES"/dynamic-wallpaper
@@ -26,7 +26,7 @@ del_files() {
 	if [[ -L /usr/bin/dwall ]]; then
 		sudo rm /usr/bin/dwall
 	fi
-	echo -e ${GREEN}"[*] Uninstalled Successfully."${WHITE}
+	echo -e "${GREEN}""[*] Uninstalled Successfully.""${WHITE}"
 }
 
 ## Uninstall

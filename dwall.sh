@@ -16,7 +16,7 @@ MAGENTABG="$(printf '\033[45m')"  CYANBG="$(printf '\033[46m')"  WHITEBG="$(prin
 
 ## Wallpaper directory
 DIR="/usr/share/dynamic-wallpaper/images"
-HOUR=`date +%k`
+HOUR=$(date +%k)
 
 ## Wordsplit in ZSH
 set -o shwordsplit 2>/dev/null
@@ -43,11 +43,11 @@ trap exit_on_signal_SIGINT SIGINT
 trap exit_on_signal_SIGTERM SIGTERM
 
 ## Prerequisite
-Prerequisite() { 
+Prerequisite() {
     dependencies=(feh xrandr crontab)
     for dependency in "${dependencies[@]}"; do
         type -p "$dependency" &>/dev/null || {
-            echo -e ${RED}"[!] ERROR: Could not find ${GREEN}'${dependency}'${RED}, is it installed?" >&2
+            echo -e "${RED}""[!] ERROR: Could not find ${GREEN}'${dependency}'${RED}, is it installed?" >&2
             { reset_color; exit 1; }
         }
     done
@@ -60,29 +60,29 @@ usage() {
 		${RED}╺┳┓╻ ╻┏┓╻┏━┓┏┳┓╻┏━╸   ${GREEN}╻ ╻┏━┓╻  ╻  ┏━┓┏━┓┏━┓┏━╸┏━┓
 		${RED} ┃┃┗┳┛┃┗┫┣━┫┃┃┃┃┃     ${GREEN}┃╻┃┣━┫┃  ┃  ┣━┛┣━┫┣━┛┣╸ ┣┳┛
 		${RED}╺┻┛ ╹ ╹ ╹╹ ╹╹ ╹╹┗━╸   ${GREEN}┗┻┛╹ ╹┗━╸┗━╸╹  ╹ ╹╹  ┗━╸╹┗╸${WHITE}
-		
+
 		Dwall V2.0   : Set wallpapers according to current time.
 		Developed By : Aditya Shakya (@adi1090x)
-			
-		Usage : `basename $0` [-h] [-p] [-s style]
+
+        Usage : $(basename "$0") [-h] [-p] [-s style]
 
 		Options:
 		   -h	Show this help message
 		   -p	Use pywal to set wallpaper
 		   -s	Name of the style to apply
-		   
+
 	EOF
 
-	styles=(`ls $DIR`)
-	printf ${GREEN}"Available styles:  "
-	printf -- ${ORANGE}'%s  ' "${styles[@]}"
-	printf -- '\n\n'${WHITE}
+	styles=$(ls "$DIR")
+	printf '%bAvailable styles:  ' "${GREEN}"
+	printf -- '%b%s  ' "${ORANGE}" "${styles[@]}"
+	printf -- '%b\n\n' "${WHITE}"
 
     cat <<- EOF
-		Examples: 
-		`basename $0` -s beach        Set wallpaper from 'beach' style
-		`basename $0` -p -s sahara    Set wallpaper from 'sahara' style using pywal
-		
+		Examples:
+        $(basename "$0") -s beach        Set wallpaper from 'beach' style
+        $(basename "$0") -p -s sahara    Set wallpaper from 'sahara' style using pywal
+
 	EOF
 }
 
@@ -97,7 +97,7 @@ set_kde() {
 			d.currentConfigGroup = Array('Wallpaper',
 										'org.kde.image',
 										'General');
-			d.writeConfig('Image', 'file://"$1"')
+			d.writeConfig('Image', 'file://""$1""')
 		}"
 }
 
@@ -108,7 +108,7 @@ set_cinnamon() {
 
 ## For XFCE only
 if [[ "$OSTYPE" == "linux"* ]]; then
-	SCREEN="$(xrandr --listactivemonitors | awk -F ' ' 'END {print $1}' | tr -d \:)"
+	SCREEN="$(xrandr --listactivemonitors | awk -F ' ' 'END {print $1}' | tr -d :)"
 	MONITOR="$(xrandr --listactivemonitors | awk -F ' ' 'END {print $2}' | tr -d \*+)"
 fi
 
@@ -129,7 +129,7 @@ case "$OSTYPE" in
 				SETTER=set_kde
 			elif [[ "$DESKTOP_SESSION" =~ ^(PANTHEON|Pantheon|pantheon|GNOME|Gnome|gnome|Gnome-xorg|gnome-xorg|UBUNTU|Ubuntu|ubuntu|DEEPIN|Deepin|deepin|POP|Pop|pop)$ ]]; then
 				SETTER="gsettings set org.gnome.desktop.background picture-uri"
-			else 
+			else
 				SETTER="feh --bg-fill"
 			fi
 			;;
@@ -145,7 +145,7 @@ get_img() {
 	elif [[ -f "${image}.jpg" ]]; then
 		FORMAT="jpg"
 	else
-		echo -e ${RED}"[!] Invalid image file, Exiting..."
+		echo -e "${RED}""[!] Invalid image file, Exiting..."
 		{ reset_color; exit 1; }
 	fi
 }
@@ -153,10 +153,10 @@ get_img() {
 ## Set wallpaper with pywal
 pywal_set() {
 	get_img "$1"
-	if [[ -x `command -v wal` ]]; then
+    if [[ -x $(command -v wal) ]]; then
 		wal -i "$image.$FORMAT"
 	else
-		echo -e ${RED}"[!] pywal is not installed on your system, exiting..."
+		echo -e "${RED}""[!] pywal is not installed on your system, exiting..."
 		{ reset_color; exit 1; }
 	fi
 }
@@ -176,16 +176,16 @@ set_wallpaper() {
 		touch "$cfile"
 		echo "$image.$FORMAT" > "$cfile"
 	else
-		echo "$image.$FORMAT" > "$cfile"	
+		echo "$image.$FORMAT" > "$cfile"
 	fi
 }
 
 ## Check valid style
 check_style() {
-	styles=(`ls $DIR`)
+	styles=$(ls "$DIR")
 	for i in "${styles[@]}"; do
 		if [[ "$i" == "$1" ]]; then
-			echo -e ${BLUE}"[*] Using style : ${MAGENTA}$1"
+			echo -e "${BLUE}""[*] Using style : ${MAGENTA}$1"
 			VALID='YES'
 			{ reset_color; break; }
 		else
@@ -194,7 +194,7 @@ check_style() {
 	done
 
 	if [[ -z "$VALID" ]]; then
-		echo -e ${RED}"[!] Invalid style name : ${GREEN}$1${RED}, exiting..."
+		echo -e "${RED}""[!] Invalid style name : ${GREEN}$1${RED}, exiting..."
 		{ reset_color; exit 1; }
 	fi
 }
@@ -202,7 +202,7 @@ check_style() {
 ## Main
 main() {
 	# get current hour
-	num=$(($HOUR/1))
+	num=$((HOUR/1))
 	# set wallpaper accordingly
 	if [[ -n "$PYWAL" ]]; then
 		{ pywal_set "$num"; reset_color; exit 0; }
@@ -224,11 +224,11 @@ while getopts ":s:hp" opt; do
 			{ usage; reset_color; exit 0; }
 			;;
 		\?)
-			echo -e ${RED}"[!] Unknown option, run ${GREEN}`basename $0` -h"
+            echo -e "${RED}""[!] Unknown option, run ${GREEN}$(basename "$0") -h"
 			{ reset_color; exit 1; }
 			;;
 		:)
-			echo -e ${RED}"[!] Invalid:$G -$OPTARG$R requires an argument."
+			echo -e "${RED}""[!] Invalid:$G -$OPTARG$R requires an argument."
 			{ reset_color; exit 1; }
 			;;
 	esac
