@@ -14,8 +14,9 @@ MAGENTA="$(printf '\033[35m')"  CYAN="$(printf '\033[36m')"  WHITE="$(printf '\0
 REDBG="$(printf '\033[41m')"  GREENBG="$(printf '\033[42m')"  ORANGEBG="$(printf '\033[43m')"  BLUEBG="$(printf '\033[44m')"
 MAGENTABG="$(printf '\033[45m')"  CYANBG="$(printf '\033[46m')"  WHITEBG="$(printf '\033[47m')" BLACKBG="$(printf '\033[40m')"
 
-## Wallpaper directory
-DIR="/usr/share/dynamic-wallpaper/images"
+## wallpaper directory
+FS_DIR="$(realpath "$(dirname "$0")")"
+DIR="$FS_DIR""/images"
 HOUR=$(date +%k)
 
 ## Wordsplit in ZSH
@@ -43,8 +44,9 @@ trap exit_on_signal_SIGINT SIGINT
 trap exit_on_signal_SIGTERM SIGTERM
 
 ## Prerequisite
-Prerequisite() {
-    dependencies=(feh xrandr crontab)
+prereq() {
+    setter_prog=$(echo "$SETTER" | head -n1 | cut -d " " -f1)
+    dependencies=("$setter_prog" xrandr crontab)
     for dependency in "${dependencies[@]}"; do
         type -p "$dependency" &>/dev/null || {
             echo -e "${RED}""[!] ERROR: Could not find ${GREEN}'${dependency}'${RED}, is it installed?" >&2
@@ -68,7 +70,7 @@ FLAGS:
     -s	Name of the style to apply
 
 STYLES:
-$(ls --format=commas "$DIR" || exit 1;)
+$(ls --format=commas "$DIR")
 
 EXAMPLES:
     $(basename "$0") -s beach        Set wallpaper from 'beach' style
@@ -170,9 +172,9 @@ set_wallpaper() {
 	fi
 }
 
-## Check valid style
+## check style validity
 check_style() {
-	styles=$(ls "$DIR")
+    mapfile -t styles <<< "$(ls "$DIR" )"
 	for i in "${styles[@]}"; do
 		if [[ "$i" == "$1" ]]; then
 			echo -e "${BLUE}""[*] Using style : ${MAGENTA}$1"
@@ -224,8 +226,8 @@ while getopts ":s:hp" opt; do
 	esac
 done
 
-## Run
-Prerequisite
+# start
+prereq
 if [[ "$STYLE" ]]; then
 	check_style "$STYLE"
     main
