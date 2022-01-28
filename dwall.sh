@@ -55,35 +55,25 @@ Prerequisite() {
 
 ## Usage
 usage() {
-	clear
-    cat <<- EOF
-		${RED}╺┳┓╻ ╻┏┓╻┏━┓┏┳┓╻┏━╸   ${GREEN}╻ ╻┏━┓╻  ╻  ┏━┓┏━┓┏━┓┏━╸┏━┓
-		${RED} ┃┃┗┳┛┃┗┫┣━┫┃┃┃┃┃     ${GREEN}┃╻┃┣━┫┃  ┃  ┣━┛┣━┫┣━┛┣╸ ┣┳┛
-		${RED}╺┻┛ ╹ ╹ ╹╹ ╹╹ ╹╹┗━╸   ${GREEN}┗┻┛╹ ╹┗━╸┗━╸╹  ╹ ╹╹  ┗━╸╹┗╸${WHITE}
+cat << EOF
+dwall 2.0.0
+A cli tool to set wallpapers according to the current time
 
-		Dwall V2.0   : Set wallpapers according to current time.
-		Developed By : Aditya Shakya (@adi1090x)
+USAGE:
+    $(basename "$0") [-h] [-p] [-s style]
 
-        Usage : $(basename "$0") [-h] [-p] [-s style]
+FLAGS:
+    -h	Show this help message
+    -p	Use pywal to set wallpaper
+    -s	Name of the style to apply
 
-		Options:
-		   -h	Show this help message
-		   -p	Use pywal to set wallpaper
-		   -s	Name of the style to apply
+STYLES:
+$(ls --format=commas "$DIR" || exit 1;)
 
-	EOF
-
-	styles=$(ls "$DIR")
-	printf '%bAvailable styles:  ' "${GREEN}"
-	printf -- '%b%s  ' "${ORANGE}" "${styles[@]}"
-	printf -- '%b\n\n' "${WHITE}"
-
-    cat <<- EOF
-		Examples:
-        $(basename "$0") -s beach        Set wallpaper from 'beach' style
-        $(basename "$0") -p -s sahara    Set wallpaper from 'sahara' style using pywal
-
-	EOF
+EXAMPLES:
+    $(basename "$0") -s beach        Set wallpaper from 'beach' style
+    $(basename "$0") -p -s sahara    Set wallpaper from 'sahara' style using pywal
+EOF
 }
 
 ## Set wallpaper in kde
