@@ -15,7 +15,7 @@ REDBG="$(printf '\033[41m')"  GREENBG="$(printf '\033[42m')"  ORANGEBG="$(printf
 MAGENTABG="$(printf '\033[45m')"  CYANBG="$(printf '\033[46m')"  WHITEBG="$(printf '\033[47m')" BLACKBG="$(printf '\033[40m')"
 
 ## wallpaper directory
-FS_DIR="$(realpath "$(dirname "$0")")"
+FS_DIR="$(dirname "$(realpath "$0")")"
 DIR="$FS_DIR""/images"
 HOUR=$(date +%k)
 
