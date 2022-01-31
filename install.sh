@@ -10,12 +10,12 @@ REDBG="$(printf '\033[41m')"  GREENBG="$(printf '\033[42m')"  ORANGEBG="$(printf
 MAGENTABG="$(printf '\033[45m')"  CYANBG="$(printf '\033[46m')"  WHITEBG="$(printf '\033[47m')" BLACKBG="$(printf '\033[40m')"
 
 # Path
-DIR=`pwd`
+DIR=$(pwd)
 DES="/usr/share"
 
 ## Make dirs
 mkdir_dw() {
-	echo -e ${ORANGE}"[*] Installing Dynamic Wallpaper..."${WHITE}
+	echo -e "${ORANGE}""[*] Installing Dynamic Wallpaper...""${WHITE}"
 	if [[ -d "$DES"/dynamic-wallpaper ]]; then
 		# delete old directory
 		sudo rm -rf "$DES"/dynamic-wallpaper
@@ -40,7 +40,7 @@ copy_files() {
 	else
 		sudo ln -s "$DES"/dynamic-wallpaper/dwall.sh /usr/bin/dwall
 	fi
-	echo -e ${GREEN}"[*] Installed Successfully. Execute 'dwall' to Run."${WHITE}
+	echo -e "${GREEN}""[*] Installed Successfully. Execute 'dwall' to Run.""${WHITE}"
 }
 
 ## Install
