@@ -168,7 +168,7 @@ set_wallpaper() {
 
 	# set wallpaper with setter
 	if [[ -n "$FORMAT" ]]; then
-		$SETTER "$image.$FORMAT"
+		$SETTER "file://$image.$FORMAT"
 	fi
 
 	# make/update dwall cache file
