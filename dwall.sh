@@ -128,7 +128,7 @@ case "$OSTYPE" in
 			elif [[ "$DESKTOP_SESSION" =~ ^(/usr/share/xsessions/plasma|NEON|Neon|neon|PLASMA|Plasma|plasma|KDE|Kde|kde)$ ]]; then
 				SETTER=set_kde
 			elif [[ "$DESKTOP_SESSION" =~ ^(PANTHEON|Pantheon|pantheon|GNOME|Gnome|gnome|Gnome-xorg|gnome-xorg|UBUNTU|Ubuntu|ubuntu|DEEPIN|Deepin|deepin|POP|Pop|pop)$ ]]; then
-			  [[ `gsettings get org.gnome.desktop.interface color-scheme` =~ 'dark' ]] && GKEY="picture-uri-dark" || GKEY="picture-uri"
+			  [[ `gsettings get org.gnome.desktop.interface color-scheme 2>$1` =~ 'dark' ]] && GKEY="picture-uri-dark" || GKEY="picture-uri"
 				SETTER="gsettings set org.gnome.desktop.background $GKEY"
 			else 
 				SETTER="feh --bg-fill"
