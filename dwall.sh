@@ -117,17 +117,17 @@ case "$OSTYPE" in
 	linux*)
 			if [ -n "$SWAYSOCK" ]; then
 				SETTER="eval ogurictl output '*' --image"
-			elif [[ "$DESKTOP_SESSION" =~ ^(MATE|Mate|mate)$ ]]; then
+			elif [[ "$XDG_CURRENT_DESKTOP" =~ ^(MATE|Mate|mate)$ ]]; then
 				SETTER="gsettings set org.mate.background picture-filename"
-			elif [[ "$DESKTOP_SESSION" =~ ^(Xfce Session|xfce session|XFCE|xfce|Xubuntu|xubuntu)$ ]]; then
+			elif [[ "$XDG_CURRENT_DESKTOP" =~ ^(Xfce Session|xfce session|XFCE|xfce|Xubuntu|xubuntu)$ ]]; then
 				SETTER="xfconf-query --channel xfce4-desktop --property /backdrop/screen$SCREEN/monitor$MONITOR/workspace0/last-image --set"
-			elif [[ "$DESKTOP_SESSION" =~ ^(LXDE|Lxde|lxde)$ ]]; then
+			elif [[ "$XDG_CURRENT_DESKTOP" =~ ^(LXDE|Lxde|lxde)$ ]]; then
 				SETTER="pcmanfm --set-wallpaper"
-			elif [[ "$DESKTOP_SESSION" =~ ^(cinnamon|Cinnamon)$ ]]; then
+			elif [[ "$XDG_CURRENT_DESKTOP" =~ ^(cinnamon|Cinnamon)$ ]]; then
 				SETTER=set_cinnamon
-			elif [[ "$DESKTOP_SESSION" =~ ^(/usr/share/xsessions/plasma|NEON|Neon|neon|PLASMA|Plasma|plasma|KDE|Kde|kde)$ ]]; then
+			elif [[ "$XDG_CURRENT_DESKTOP" =~ ^(/usr/share/xsessions/plasma|NEON|Neon|neon|PLASMA|Plasma|plasma|KDE|Kde|kde)$ ]]; then
 				SETTER=set_kde
-			elif [[ "$DESKTOP_SESSION" =~ ^(PANTHEON|Pantheon|pantheon|GNOME|Gnome|gnome|Gnome-xorg|gnome-xorg|UBUNTU|Ubuntu|ubuntu|DEEPIN|Deepin|deepin|POP|Pop|pop)$ ]]; then
+			elif [[ "$XDG_CURRENT_DESKTOP" =~ ^(PANTHEON|Pantheon|pantheon|GNOME|Gnome|gnome|Gnome-xorg|gnome-xorg|UBUNTU|Ubuntu|ubuntu|DEEPIN|Deepin|deepin|POP|Pop|pop)$ ]]; then
 				SETTER="gsettings set org.gnome.desktop.background picture-uri"
 			else 
 				SETTER="feh --bg-fill"
