@@ -182,7 +182,7 @@ $ sudo apt-get install libheif-examples
 $ cd Downloads/heic_images
 
 # convert to jpg images
-$ for file in *.heic; do heif-convert $file ${file/%.heic/.jpg}; done
+$ for file in *.heic; do heif-convert "$file" "${file/%.heic/.jpg}"; done
 ```
 
 - Now, you have the images, just follow the [above](https://github.com/adi1090x/dynamic-wallpaper#How-to-add-own-wallpapers) steps to use these wallpapers with `dwall`.
