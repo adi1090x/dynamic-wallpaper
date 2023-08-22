@@ -236,6 +236,22 @@ In the terminal, *xfconf-query* will print lines starting with `set:`, which sho
 
 ```
 
+3. **Autostart** : If you want to autostart the script with desktop, you can add it to your WM autostart file & if it doesn't work for you, you can create a `desktop file` in `$HOME/.config/autostart` dir.
+```bash
+$ cd $HOME/.config/autostart && touch dwall.desktop
+
+# Add this to dwall.desktop file
+
+[Desktop Entry]
+Name=Dynamic Wallpaper
+Comment=Set desktop background according to current time.
+Exec=/usr/bin/dwall -s firewatch &
+Type=Application
+Icon=wallpaper
+Categories=Accessories;
+```
+> Alternatively, you can also put the `/usr/bin/dwall -s firewatch &` command in your `~/.bashrc` file.
+
 ### Quick FYI
 
 + In KDE, `dwall` changes the wallpaper in all the Activities.
