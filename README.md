@@ -176,7 +176,7 @@ $ sudo apt-get install libheif-examples
 
 ```
 
-- Move you `.heic` file in a directory and run following command to convert images - 
+- Move your `.heic` file in a directory and run following command to convert images - 
 ```bash
 # change to directory
 $ cd Downloads/heic_images
