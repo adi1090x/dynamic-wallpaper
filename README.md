@@ -23,8 +23,9 @@
 + Users can add their own wallpapers.
 + With `Cron`, Wallpaper changes according to time, throughout the day.
 + Tested on :
-  - **`Window Managers`** : `Openbox`, `i3wm`, `bspwm`, `awesomewm`, `Fluxbox`, `Fvwm`, `Swaywm`
-  - **`Desktop Environments`** : `KDE`, `Pantheon`, `Gnome`, `Deepin`, `Cinnamon`, `XFCE`, `LXDE`, `MATE`
+  - **`Window Managers`** : Works on all window managers (tested on all WMs Archcraft have)
+  - **`Wayland Compositors`** : `sway`, `wayfire`, `river`, `newm`, `hyprland`
+  - **`Desktop Environments`** : `KDE`, `Pantheon`, `Gnome`, `Deepin`, `Cinnamon`, `XFCE`, `LXDE`, `MATE`, `Zorin`, `Budgie`
 
 ### Dependencies
 
@@ -73,7 +74,7 @@ $ dwall
  ┃┃┗┳┛┃┗┫┣━┫┃┃┃┃┃     ┃╻┃┣━┫┃  ┃  ┣━┛┣━┫┣━┛┣╸ ┣┳┛
 ╺┻┛ ╹ ╹ ╹╹ ╹╹ ╹╹┗━╸   ┗┻┛╹ ╹┗━╸┗━╸╹  ╹ ╹╹  ┗━╸╹┗╸
 
-Dwall V2.0   : Set wallpapers according to current time.
+Dwall V3.0   : Set wallpapers according to current time.
 Developed By : Aditya Shakya (@adi1090x)
 
 Usage : test.sh [-h] [-p] [-s style]

@@ -9,10 +9,14 @@
 ## Created to work better with job schedulers (cron)
 
 ## ANSI Colors (FG & BG)
-RED="$(printf '\033[31m')"  GREEN="$(printf '\033[32m')"  ORANGE="$(printf '\033[33m')"  BLUE="$(printf '\033[34m')"
-MAGENTA="$(printf '\033[35m')"  CYAN="$(printf '\033[36m')"  WHITE="$(printf '\033[37m')" BLACK="$(printf '\033[30m')"
-REDBG="$(printf '\033[41m')"  GREENBG="$(printf '\033[42m')"  ORANGEBG="$(printf '\033[43m')"  BLUEBG="$(printf '\033[44m')"
-MAGENTABG="$(printf '\033[45m')"  CYANBG="$(printf '\033[46m')"  WHITEBG="$(printf '\033[47m')" BLACKBG="$(printf '\033[40m')"
+RED="$(printf '\033[31m')"        GREEN="$(printf '\033[32m')"
+ORANGE="$(printf '\033[33m')"     BLUE="$(printf '\033[34m')"
+MAGENTA="$(printf '\033[35m')"    CYAN="$(printf '\033[36m')"
+WHITE="$(printf '\033[37m')"      BLACK="$(printf '\033[30m')"
+REDBG="$(printf '\033[41m')"      GREENBG="$(printf '\033[42m')"
+ORANGEBG="$(printf '\033[43m')"   BLUEBG="$(printf '\033[44m')"
+MAGENTABG="$(printf '\033[45m')"  CYANBG="$(printf '\033[46m')"
+WHITEBG="$(printf '\033[47m')"    BLACKBG="$(printf '\033[40m')"
 
 ## Wallpaper directory
 DIR="`pwd`/images"
@@ -61,7 +65,7 @@ usage() {
 		${RED} ┃┃┗┳┛┃┗┫┣━┫┃┃┃┃┃     ${GREEN}┃╻┃┣━┫┃  ┃  ┣━┛┣━┫┣━┛┣╸ ┣┳┛
 		${RED}╺┻┛ ╹ ╹ ╹╹ ╹╹ ╹╹┗━╸   ${GREEN}┗┻┛╹ ╹┗━╸┗━╸╹  ╹ ╹╹  ┗━╸╹┗╸${WHITE}
 		
-		Dwall V2.0   : Set wallpapers according to current time.
+		Dwall V3.0   : Set wallpapers according to current time.
 		Developed By : Aditya Shakya (@adi1090x)
 			
 		Usage : `basename $0` [-h] [-p] [-s style]
@@ -106,34 +110,52 @@ set_cinnamon() {
 	 gsettings set org.cinnamon.desktop.background picture-uri "file:///$1"
 }
 
-## For XFCE only
-if [[ "$OSTYPE" == "linux"* ]]; then
-	SCREEN="$(xrandr --listactivemonitors | awk -F ' ' 'END {print $1}' | tr -d \:)"
-	MONITOR="$(xrandr --listactivemonitors | awk -F ' ' 'END {print $2}' | tr -d \*+)"
-fi
+## Set wallpaper in GNOME
+set_gnome() {
+	gsettings set org.gnome.desktop.background picture-uri "file:///$1"
+	gsettings set org.gnome.desktop.screensaver picture-uri "file:///$1"
+}
 
 ## Choose wallpaper setter
 case "$OSTYPE" in
 	linux*)
-			if [ -n "$SWAYSOCK" ]; then
+			if [[ "$XDG_SESSION_TYPE" == 'x11' ]]; then
+				if [[ "$DESKTOP_SESSION" =~ ^(MATE|Mate|mate)$ ]]; then
+					SETTER="gsettings set org.mate.background picture-filename"
+				elif [[ "$DESKTOP_SESSION" =~ ^(Xfce Session|xfce session|XFCE|xfce|Xubuntu|xubuntu)$ ]]; then
+					SCREEN="$(xrandr --listactivemonitors | awk -F ' ' 'END {print $1}' | tr -d \:)"
+					MONITOR="$(xrandr --listactivemonitors | awk -F ' ' 'END {print $2}' | tr -d \*+)"
+					SETTER="xfconf-query --channel xfce4-desktop --property /backdrop/screen$SCREEN/monitor$MONITOR/workspace0/last-image --set"
+				elif [[ "$DESKTOP_SESSION" =~ ^(LXDE|Lxde|lxde)$ ]]; then
+					SETTER="pcmanfm --set-wallpaper"
+				elif [[ "$DESKTOP_SESSION" =~ ^(cinnamon|Cinnamon)$ ]]; then
+					SETTER=set_cinnamon
+				elif [[ "$DESKTOP_SESSION" =~ ^(/usr/share/xsessions/plasma|NEON|Neon|neon|PLASMA|Plasma|plasma|KDE|Kde|kde)$ ]]; then
+					SETTER=set_kde
+				elif [[ "$DESKTOP_SESSION" =~ ^(PANTHEON|Pantheon|pantheon|GNOME|Gnome|gnome|Gnome-xorg|gnome-xorg|UBUNTU|Ubuntu|ubuntu|DEEPIN|Deepin|deepin|POP|Pop|pop|ZORIN|Zorin|zorin|budgie-desktop)$ ]]; then
+					SETTER=set_gnome
+				else 
+					SETTER="feh --bg-fill"
+				fi
+			elif [[ "$XDG_SESSION_TYPE" == 'wayland' ]]; then
 				SETTER="eval ogurictl output '*' --image"
-			elif [[ "$DESKTOP_SESSION" =~ ^(MATE|Mate|mate)$ ]]; then
-				SETTER="gsettings set org.mate.background picture-filename"
-			elif [[ "$DESKTOP_SESSION" =~ ^(Xfce Session|xfce session|XFCE|xfce|Xubuntu|xubuntu)$ ]]; then
-				SETTER="xfconf-query --channel xfce4-desktop --property /backdrop/screen$SCREEN/monitor$MONITOR/workspace0/last-image --set"
-			elif [[ "$DESKTOP_SESSION" =~ ^(LXDE|Lxde|lxde)$ ]]; then
-				SETTER="pcmanfm --set-wallpaper"
-			elif [[ "$DESKTOP_SESSION" =~ ^(cinnamon|Cinnamon)$ ]]; then
-				SETTER=set_cinnamon
-			elif [[ "$DESKTOP_SESSION" =~ ^(/usr/share/xsessions/plasma|NEON|Neon|neon|PLASMA|Plasma|plasma|KDE|Kde|kde)$ ]]; then
-				SETTER=set_kde
-			elif [[ "$DESKTOP_SESSION" =~ ^(PANTHEON|Pantheon|pantheon|GNOME|Gnome|gnome|Gnome-xorg|gnome-xorg|UBUNTU|Ubuntu|ubuntu|DEEPIN|Deepin|deepin|POP|Pop|pop|ZORIN|Zorin|zorin)$ ]]; then
-				SETTER="gsettings set org.gnome.desktop.background picture-uri"
-			else 
-				SETTER="feh --bg-fill"
 			fi
 			;;
 esac
+
+## Display Info
+display_info() {
+	if [[ "$XDG_SESSION_TYPE" == 'x11' ]]; then
+		echo -e ${ORANGE}"[*] Setting wallpaper in ${GREEN}$XDG_SESSION_TYPE ($DESKTOP_SESSION)${ORANGE} session, using : ${MAGENTA}$SETTER"
+	elif [[ "$XDG_SESSION_TYPE" == 'wayland' ]]; then
+		if [[ ! `pidof oguri` ]]; then
+			echo -e ${RED}"[*] 'oguri' daemon is not running. You must start the daemon first.\n[!] Kill 'swaybg' in sway session if the wallpaper is not getting applied."
+			exit 1
+		else
+			echo -e ${ORANGE}"[*] Setting wallpaper in ${GREEN}$XDG_SESSION_TYPE ($XDG_SESSION_DESKTOP)${ORANGE} session, using : ${MAGENTA}$SETTER"
+		fi
+	fi
+}
 
 ## Get Image
 get_img() {
@@ -183,6 +205,7 @@ set_wallpaper() {
 ## Check valid style
 check_style() {
 	styles=(`ls "$DIR"`)
+	display_info
 	for i in "${styles[@]}"; do
 		if [[ "$i" == "$1" ]]; then
 			echo -e ${BLUE}"[*] Using style : ${MAGENTA}$1"
@@ -228,7 +251,7 @@ while getopts ":s:hp" opt; do
 			{ reset_color; exit 1; }
 			;;
 		:)
-			echo -e ${RED}"[!] Invalid:$G -$OPTARG$R requires an argument."
+			echo -e ${RED}"[!] Invalid:$GREEN -${OPTARG}$RED requires an argument."
 			{ reset_color; exit 1; }
 			;;
 	esac
