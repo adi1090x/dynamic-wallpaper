@@ -130,7 +130,7 @@ case "$OSTYPE" in
 					SETTER="pcmanfm --set-wallpaper"
 				elif [[ "$DESKTOP_SESSION" =~ ^(cinnamon|Cinnamon)$ ]]; then
 					SETTER=set_cinnamon
-				elif [[ "$DESKTOP_SESSION" =~ ^(/usr/share/xsessions/plasma|NEON|Neon|neon|PLASMA|Plasma|plasma|KDE|Kde|kde)$ ]]; then
+				elif [[ "$DESKTOP_SESSION" =~ ^(/usr/share/xsessions/plasma|/usr/share/xsessions/plasmax11|NEON|Neon|neon|PLASMA|Plasma|plasma|KDE|Kde|kde)$ ]]; then
 					SETTER=set_kde
 				elif [[ "$DESKTOP_SESSION" =~ ^(PANTHEON|Pantheon|pantheon|GNOME|Gnome|gnome|Gnome-xorg|gnome-xorg|gnome-classic|UBUNTU|Ubuntu|ubuntu|DEEPIN|Deepin|deepin|POP|Pop|pop|ZORIN|Zorin|zorin|budgie-desktop)$ ]]; then
 					SETTER=set_gnome
