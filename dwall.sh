@@ -106,12 +106,6 @@ set_cinnamon() {
 	 gsettings set org.cinnamon.desktop.background picture-uri "file:///$1"
 }
 
-## For XFCE only
-if [[ "$OSTYPE" == "linux"* ]]; then
-	SCREEN="$(xrandr --listactivemonitors | awk -F ' ' 'END {print $1}' | tr -d \:)"
-	MONITOR="$(xrandr --listactivemonitors | awk -F ' ' 'END {print $2}' | tr -d \*+)"
-fi
-
 ## Choose wallpaper setter
 case "$OSTYPE" in
 	linux*)
@@ -120,6 +114,8 @@ case "$OSTYPE" in
 			elif [[ "$DESKTOP_SESSION" =~ ^(MATE|Mate|mate)$ ]]; then
 				SETTER="gsettings set org.mate.background picture-filename"
 			elif [[ "$DESKTOP_SESSION" =~ ^(Xfce Session|xfce session|XFCE|xfce|Xubuntu|xubuntu)$ ]]; then
+        SCREEN="$(xrandr --listactivemonitors | awk -F ' ' 'END {print $1}' | tr -d \:)"
+        MONITOR="$(xrandr --listactivemonitors | awk -F ' ' 'END {print $2}' | tr -d \*+)"
 				SETTER="xfconf-query --channel xfce4-desktop --property /backdrop/screen$SCREEN/monitor$MONITOR/workspace0/last-image --set"
 			elif [[ "$DESKTOP_SESSION" =~ ^(LXDE|Lxde|lxde)$ ]]; then
 				SETTER="pcmanfm --set-wallpaper"
